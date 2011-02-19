@@ -17,3 +17,10 @@ class User(GeoModel):
       return self.name
     if self.user.nickname():
       return self.user.nickname()
+  
+  def sanitize(self):
+    return dict(
+      name=self.preferred_name(),
+      lat=self.location.lat if self.location else None,
+      lon=self.location.lon if self.location else None,
+    )
