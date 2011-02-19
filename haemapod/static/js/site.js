@@ -1,15 +1,12 @@
-// Common site JS
-
-
 // Project: haemapod (hackathon)
 // URI: /js/site.js
 // Description: Common Site Javascript
 // Version: 2011-02-18
-// Author: ReShun Davis
 
 // Main Site object
-if (typeof window.Site === "undefined"){window.Site = {};}
-
+if (typeof window.Site === "undefined") {
+  window.Site = {};
+}
 
 // Function prototype method
 Function.prototype.bind = function() {
