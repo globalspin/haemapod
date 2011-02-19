@@ -1,5 +1,9 @@
 <div class="user-details">
-  <p class="gravatar"><img src="{{user.gravatar()|escape}}" width="40" height="40">
+  <p class="gravatar">
+    <a href="{{user.permalink()|escape}}" class="async">
+      <img src="{{user.gravatar()|escape}}" width="40" height="40">
+    </a>
+  </p>
 
   {% if user.link %}
     <p class="link"><a href="http://{{user.link|escape}}">{{user.pretty_link()|escape}}</a>
