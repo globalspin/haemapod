@@ -1,5 +1,7 @@
+from model import Event
+
 def post(handler, response):
   pass
 
 def get(handler, response):
-  pass
+  response.event = Event()
