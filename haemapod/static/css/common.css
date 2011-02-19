@@ -267,6 +267,33 @@ li {
   clear: both;
 }
 
+/* forms */
+
+form p {
+  position: relative;
+}
+
+form input,
+form select {
+  font-size: 1em;
+}
+
+form input[type=text] {
+  border: solid #AAA;
+  border-width: 0 0 1px 0;
+  padding: 0 5px;
+}
+
+#geocode_loading {
+  width: 16px;
+  height: 16px;
+  background: url('/images/throbber.gif') no-repeat;
+  visibility: hidden;
+  display: inline-block;
+  right: 0;
+  top: 0;
+}
+
 /* sections/event */
 
 .section-event {

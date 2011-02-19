@@ -4,16 +4,16 @@
   <h2>Add your event</h2>
   {% if handler.current_user() %}
     <form method="post" action="/events/add" class="async">
-      <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
+      <p><label for="name">Name</label> <input type="text" name="name" id="name" value="{{event.name or ''|escape}}">
 
-      <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
+      <p><label for="city">City</label> <input type="text" name="city" id="city" value="{{event.city or ''|escape}}">
         <span id="geocode_loading"></span>
-        <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
-        <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
-      <p>Date <input type="text" name="date" value="{{event.date or ''|escape}}">
+        <input type="hidden" name="lat" id="lat" value="{{user.location.lat or ''|escape}}">
+        <input type="hidden" name="lon" id="lon" value="{{user.location.lon or ''|escape}}">
+      <p><label for="date">Date</label> <input type="text" name="date" id="date" value="{{event.date or ''|escape}}">
 
-      <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
-      <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
+      <p><label for="slug">Slug</label> <input type="text" name="slug" id="slug" value="{{event.slug or ''|escape}}">
+      <p><label for="link">URL</label> <input type="text" name="link" id="url" value="{{event.link or ''|escape}}">
       <p><input type="submit" value="Add event" {% if not event.location %}disabled="disabled"{% endif %}>
     </form>
   {% else %}
