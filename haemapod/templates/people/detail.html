@@ -1,23 +1,27 @@
-<h2>{{user.preferred_name()|escape}}</h2>
+{% extends "wrapper.html" %}
 
-{% include "sections/user.html" %}
+{% block main %}
+  <h2>{{user.preferred_name()|escape}}</h2>
 
-<h3>organizer:</h3>
+  {% include "sections/user.html" %}
 
-<ul>
-  {% for event in organizing %}
-    <li>{% include "sections/event.html" %}</li>
-  {% else %}
-    <li>None</li>
-  {% endfor %}
-</ul>
+  <h3>organizer:</h3>
 
-<h3>attendee:</h3>
+  <ul>
+    {% for event in organizing %}
+      <li>{% include "sections/event.html" %}</li>
+    {% else %}
+      <li>None</li>
+    {% endfor %}
+  </ul>
 
-<ul>
-  {% for event in attending %}
-    <li>{% include "sections/event.html" %}</li>
-  {% else %}
-    <li>None</li>
-  {% endfor %}
-</ul>
+  <h3>attendee:</h3>
+
+  <ul>
+    {% for event in attending %}
+      <li>{% include "sections/event.html" %}</li>
+    {% else %}
+      <li>None</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
