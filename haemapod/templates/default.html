@@ -28,8 +28,8 @@
     <div class="cleaner"></div>
   </div>
   <div class="col-left" id="main">
-    {% if handler.request.get('state') == 'people-add' %}
-      {% include 'people/add.html' %}
+    {% if state %}
+      {% include state+".html" %}
     {% else %}
       <p>SpaceUp is a thing. This text explains the concept of the thing.
         
