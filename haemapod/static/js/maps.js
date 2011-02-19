@@ -6,6 +6,10 @@ Site.Maps = function (oArgs) {
   this.mapType = oArgs.map_type || 'ROADMAP';
   this.aMarkers = [];
   this.aCircles = [];
+  this.aEvents = [];
+  this.aUsers = [];
+  this.aPolylines = [];
+  this.activeUserIds = []
   $(this.setup.bind(this));
 }
 
@@ -100,8 +104,9 @@ Site.Maps.prototype.addItemEvent = function (oResponse) {
       icon: this.markerImage,
       title: oItem.name
     });
-    marker['obj'] = oItem;
+    marker['permalink'] = oItem.permalink;
     this.aMarkers.push(marker);
+    this.aEvents.push(oItem);
   }.bind(this));
 }
 
@@ -119,8 +124,9 @@ Site.Maps.prototype.addItemUser = function (oResponse) {
       strokeColor: '#000',
       strokeOpacity: 0.65,
     });
-    circle['obj'] = oItem;
+    circle['permalink'] = oItem.permalink;
     this.aCircles.push(circle);
+    this.aUsers.push(oItem);
   }.bind(this));
 }
 
@@ -137,6 +143,7 @@ Site.Maps.prototype.newUserAdded = function (user) {
     strokeOpacity: 0.65,
   });
   this.aCircles.push(circle);
+  this.aUsers.push(user);
   
   // $.each(this.aCircles, function(_, item) {
   //   item.setMap(this.map);
@@ -152,14 +159,17 @@ Site.Maps.prototype.newEventAdded = function (event) {
     icon: this.markerImage,
     title: event.name
   });
-  marker['obj'] = event;
+  marker['permalink'] = event.permalink;
   this.aMarkers.push(marker);
+  this.aEvents.push(event);
 }
 
 Site.Maps.prototype.highlightUser = function (user, events) {
-  user = user || this.aCircles[4].obj;
+  var user = user || this.aUsers[4];
+  var events = events || this.aCircles;
+  
   $.each(this.aCircles, function(_, item) {
-    if (item.obj.permalink == user.permalink) {
+    if (item.permalink == user.permalink) {
       item.setOptions({
         radius: 65000,
         fillOpacity: 1,
@@ -169,17 +179,73 @@ Site.Maps.prototype.highlightUser = function (user, events) {
         strokeOpacity: 1,
         zIndex: 100
       });
+    } else {
+      this.resetUser(item);
     }
   }.bind(this));
 }
 
 Site.Maps.prototype.highlightEvent = function (event, users) {
-  event = event || this.aMarkers[4].obj;
+  var event = event || this.aEvents[4];
+  var users = users || this.aUsers;
+  $.each(users, function() {
+    this.activeUserIds[users.permalink] = 1;
+  }.bind(this));
+  console.log(this.activeUserIds);
+  console.log(users);
+  // return;
+  // console.log(event);
+  // console.log(this.activeUserIds);
+  
+  this.resetMap();
+  
   $.each(this.aMarkers, function(_, item) {
-    if (item.obj.permalink != event.permalink) {
+    if (item.permalink != event.permalink) {
       item.setMap(null);
+    } else {
+      this.activeMarker = item;
     }
   }.bind(this));
+  
+  $.each(this.aCircles, function(_, item) {
+    console.log(this.activeUserIds[item.permalink]);
+    if (!this.activeUserIds[item.permalink]) {
+      item.setMap(null);
+    } else {
+      var line = new GM.Polyline({
+        map: this.map,
+        path: [item.getCenter(),this.activeMarker.getPosition()],
+        strokeColor: '#3A2FF9',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        zIndex: 1
+      });
+
+      item.setOptions({
+        fillOpacity: 1,
+        fillColor: '#3A2FF9',
+        strokeColor: '#3A2FF9',
+        strokeWeight: 3,
+        strokeOpacity: 1,
+        zIndex: 100
+      });
+
+      this.aPolylines.push(line);
+    }
+  }.bind(this));
+}
+
+Site.Maps.prototype.resetUser = function (item) {
+  item.setOptions({
+    radius: 50000,
+    fillOpacity: 0.8,
+    fillColor: '#C42816',
+    strokeWeight: 1,
+    strokeColor: '#000',
+    strokeOpacity: 0.65,
+    zIndex: 10
+  });
+  item.setMap(this.map); // Show the user
 }
 
 Site.Maps.prototype.resetUsers = function () {
@@ -205,9 +271,18 @@ Site.Maps.prototype.resetEvents = function () {
   this.showUsers();
 }
 
+Site.Maps.prototype.removePolylines = function () {
+  $.each(this.aPolylines, function(_, item) {
+    item.setMap(null); // Show the event
+  }.bind(this));
+  
+  this.aPolylines = [];
+}
+
 Site.Maps.prototype.resetMap = function () {
   this.resetUsers();
   this.resetEvents();
+  this.removePolylines();
 }
 
 Site.Maps.prototype.showUsers = function () {
