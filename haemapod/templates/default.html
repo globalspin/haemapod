@@ -1,1 +1,8 @@
 Haemapod!
+
+{% if handler.current_user() %}
+  <p>You are {{handler.current_user().key().name()}}</p>
+  <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
+{% else %}
+  <p><a href="{{handler.login_url()|escape}}">log in</a></p>
+{% endif %}
