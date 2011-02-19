@@ -1,6 +1,6 @@
 Site.Maps = function (oArgs) {
   oArgs = oArgs || {}
-  this.zoom = oArgs.zoom || 3;
+  this.zoom = oArgs.zoom || 4;
   this.initialLat = oArgs.latitude || 38;
   this.initialLng = oArgs.longitude || -97;
   this.mapType = oArgs.map_type || 'ROADMAP';
@@ -15,7 +15,11 @@ Site.Maps.prototype.setup = function () {
   this.mapOptions = {
     zoom: this.zoom,
     center: this.latlng,
-    mapTypeId: google.maps.MapTypeId[this.mapType]
+    mapTypeId: google.maps.MapTypeId[this.mapType],
+    backgroundColor: '#FFF',
+    disableDefaultUI: 1,
+    draggable: false,
+    scrollwheel: false
   };
   
   this.initialize();
@@ -97,7 +101,7 @@ Site.Maps.prototype.addItemCircle = function (oResponse) {
     var marker = new google.maps.Circle({
       center: latLng,
       map: this.map,
-      radius: 100000,
+      radius: 50000,
       fillOpacity: 0.8,
       fillColor: '#C42816',
       strokeWeight: 1,

@@ -81,7 +81,24 @@ a:active {
   text-decoration: none;
 }
 
+.col-left,
+.col-right {
+  float: left;
+}
+
+.col-left {
+  width: 350px;
+  margin: 0 15px;
+}
+
+.col-right {
+  width: 805px;
+  margin: 0;
+  padding: 0;
+}
+
 #outer {
+  width: 1200px;
   margin: 0 auto;
   background-color: #FFF;
 }
@@ -96,7 +113,7 @@ a:active {
 }
 
 #map_canvas { 
-  width: 620px;
+  width: 805px;
   height: 450px;
 }
 
@@ -122,13 +139,29 @@ a:active {
   margin-left: 30px;
 }
 
-#map-key .what li span {
+#map-key li span {
+  left: -17px;
+  top: 2px;
+  position: absolute;
   display: block;
   width: 10px;
   height: 10px;
   background-color: #C42816;
-  border-radius: 3px;
+}
+
+#map-key li span.circle {
+  width: 10px;
+  height: 10px;
+  background-color: #C42816;
+  border-radius: 6px;
   border: 1px solid #666;
+}
+
+#map-key li span.marker {
+  top: -2px;
+  width: 12px;
+  height: 20px;
+  background: transparent url('/images/spaceup-pin-12x20.png') no-repeat 0 0;
 }
 
 h2, h3 {

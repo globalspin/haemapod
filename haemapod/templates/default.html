@@ -27,7 +27,7 @@
     </div>
     <div class="cleaner"></div>
   </div>
-  <div class="grid_4" id="main">
+  <div class="col-left" id="main">
     {% if handler.current_user() %}
       {% if handler.request.get('state') == 'people-add' %}
         {% include 'people/add.html' %}
@@ -42,7 +42,7 @@
     {% endif %}
   </div>
 
-  <div class="grid_8">
+  <div class="col-right">
     {% include 'sections/map.html' %}
   </div>
 {% endblock %}
