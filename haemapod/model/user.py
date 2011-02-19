@@ -55,6 +55,9 @@ class User(GeoModel):
       if ue.event.key() == event.key():
         return True
   
+  def permalink(self):
+    return '/people/%s' % self.key()
+  
   def pretty_link(self):
     if self.link:
       return re.sub('twitter.com/', '@', self.link)
