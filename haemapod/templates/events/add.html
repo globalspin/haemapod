@@ -1,16 +1,20 @@
 <script src="/js/geocoder.js"></script>
 
 <h2>Add your event</h2>
-<form method="post" action="/events/add" class="async">
-  <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
+{% if handler.current_user() %}
+  <form method="post" action="/events/add" class="async">
+    <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
 
-  <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
-    <span id="geocode_loading"></span>
-    <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
-    <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
-  <p>Date <input type="text" name="date" value="{{event.date or ''|escape}}">
+    <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
+      <span id="geocode_loading"></span>
+      <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
+      <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
+    <p>Date <input type="text" name="date" value="{{event.date or ''|escape}}">
 
-  <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
-  <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
-  <p><input type="submit" value="Add event" {% if not event.location %}disabled="disabled"{% endif %}>
-</form>
+    <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
+    <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
+    <p><input type="submit" value="Add event" {% if not event.location %}disabled="disabled"{% endif %}>
+  </form>
+{% else %}
+  {% include "sections/login.html" %}
+{% endif %}

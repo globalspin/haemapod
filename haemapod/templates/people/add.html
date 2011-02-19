@@ -25,8 +25,5 @@
     <p><input type="submit" value="Add me to the map" {% if not user.location %}disabled="disabled"{% endif %}>
   </form>
 {% else %}
-  <p>We use Google Accounts to authenticate you, because it's secure and easy.
-  <p><a href="{{handler.login_url('people-add')|escape}}">Log in with google</a>
-  <p>No account with Google? It's easy to set one up, and it can be used on lots of websites.
-  <p><a href="">Create a Google Account</a>
+  {% include "sections/login.html" %}
 {% endif %}
