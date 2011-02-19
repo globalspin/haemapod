@@ -15,13 +15,13 @@ class User(GeoModel):
   distance = db.StringProperty(choices=set(["here", "drive", "fly", "anywhere"]))
   link = db.StringProperty()
   private = db.BooleanProperty()
+  
+  email = property(fget=lambda self: self.key().name())
 
   def preferred_name(self):
     if self.name:
       return self.name
-    key_name = self.key().name()
-    key_name = sub('@.*$', '', key_name) # obscure domain
-    return key_name
+    return sub('@.*$', '', self.email) # obscure domain
   
   def sanitize(self):
     return dict(
@@ -66,7 +66,7 @@ class User(GeoModel):
     default = "http://0.gravatar.com/avatar/1a33e7a69df4f675fcd799edca088ac2?s=40&d=identicon"
     size = 40
 
-    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.key().name().lower()).hexdigest() + "?"
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.email.lower()).hexdigest() + "?"
     gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
     return gravatar_url
 
