@@ -6,6 +6,9 @@ Site.Maps = function (oArgs) {
   this.mapType = oArgs.map_type || 'ROADMAP';
   this.aMarkers = [];
   this.aCircles = [];
+  this.aEvents = {};
+  this.aUsers = {};
+  this.aPolylines = [];
   $(this.setup.bind(this));
 }
 
@@ -19,6 +22,11 @@ Site.Maps.prototype.setup = function () {
     new GM.Point(9, 30)   // anchor
   );
   
+  this.eventInfoWindow = new GM.InfoWindow({ 
+    content: "Copy goes here",
+    size: new GM.Size(50,50)
+  });
+
   // set up the map options
   this.mapOptions = {
     zoom: this.zoom,
@@ -96,17 +104,25 @@ Site.Maps.prototype.listEvents = function () {
 
 Site.Maps.prototype.addItemEvent = function (oResponse) {
   var oItems = oResponse.users || oResponse.events;
-  $.each(oItems, function(_, oItem){
-    var latLng = new GM.LatLng(oItem.lat, oItem.lng);
+  
+  for (var i = oItems.length - 1; i >= 0; i--){
+    item = oItems[i];
+    var latLng = new GM.LatLng(item.lat, item.lng);
     var marker = new GM.Marker({
       position: latLng,
       map: this.map,
       icon: this.markerImage,
-      title: oItem.name
+      title: item.name
     });
-    marker['obj'] = oItem;
+    
+    marker['key'] = item.key;
     this.aMarkers.push(marker);
-  }.bind(this));
+    this.aEvents[item.key] = item;
+  }
+  
+  
+  // $.each(oItems, function(_, oItem){
+  // }.bind(this));
 }
 
 Site.Maps.prototype.addItemUser = function (oResponse) {
@@ -122,9 +138,14 @@ Site.Maps.prototype.addItemUser = function (oResponse) {
       strokeWeight: 1,
       strokeColor: '#000',
       strokeOpacity: 0.65,
+      clickable: true
     });
-    circle['obj'] = oItem;
+    
+    GM.event.addListener(circle, 'click', this.openUserInfo.bind(this));
+    
+    circle['key'] = oItem.key;
     this.aCircles.push(circle);
+    this.aUsers[oItem.key] = oItem;
   }.bind(this));
 }
 
@@ -141,10 +162,7 @@ Site.Maps.prototype.newUserAdded = function (user) {
     strokeOpacity: 0.65,
   });
   this.aCircles.push(circle);
-  
-  // $.each(this.aCircles, function(_, item) {
-  //   item.setMap(this.map);
-  // }.bind(this));
+  this.aUsers[user.key] = user;
 }
 
 Site.Maps.prototype.newEventAdded = function (event) {
@@ -156,14 +174,27 @@ Site.Maps.prototype.newEventAdded = function (event) {
     icon: this.markerImage,
     title: event.name
   });
-  marker['obj'] = event;
+  marker['key'] = event.key;
   this.aMarkers.push(marker);
+  this.aEvents[event.key] = event;
 }
 
 Site.Maps.prototype.highlightUser = function (user, events) {
-  user = user || this.aCircles[4].obj;
-  $.each(this.aCircles, function(_, item) {
-    if (item.obj.permalink == user.permalink) {
+  var user = user || this.aUsers[4];
+  var events = events || this.aCircles;
+  var activeEventsKeys = []
+  var activeCircle;
+  if (!user) return;
+
+  this.resetMap();
+  
+  for (var i = events.length - 1; i >= 0; i--){
+    activeEventsKeys[events[i].key] = 1;
+  };
+
+  for (var i = this.aCircles.length - 1; i >= 0; i--){
+    item = this.aCircles[i];
+    if (item.key == user.key) {
       item.setOptions({
         radius: 65000,
         fillOpacity: 1,
@@ -173,21 +204,99 @@ Site.Maps.prototype.highlightUser = function (user, events) {
         strokeOpacity: 1,
         zIndex: 100
       });
+      activeCircle = item;
+    } else {
+      item.setMap(null);
+      // this.resetUser(item);
     }
-  }.bind(this));
+  }
+
+  if (!this.aPolylines) this.aPolylines = [];
+  for (var i = this.aMarkers.length - 1; i >= 0; i--){
+    var item = this.aMarkers[i];
+    if (activeEventsKeys[item.key]) {
+      var line = new GM.Polyline({
+        map: this.map,
+        path: [item.getPosition(), activeCircle.getCenter()],
+        strokeColor: '#3A2FF9',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        zIndex: 1
+      });
+      this.aPolylines.push(line);
+    } else {
+      item.setMap(null);
+    }
+    
+  };
+
 }
 
 Site.Maps.prototype.highlightEvent = function (event, users) {
-  event = event || this.aMarkers[4].obj;
-  $.each(this.aMarkers, function(_, item) {
-    if (item.obj.permalink != event.permalink) {
+  var event = event || this.aEvents[4];
+  var users = users || this.aUsers;
+  var activeUserKeys = [];
+  var activeMarker;
+  
+  for (var i = users.length - 1; i >= 0; i--){
+    activeUserKeys[users[i].key] = 1;
+  };
+
+  this.resetMap();
+  
+  for (var i = this.aMarkers.length - 1; i >= 0; i--){
+    item = this.aMarkers[i]
+    if (item.key != event.key) {
       item.setMap(null);
+    } else {
+      activeMarker = item;
     }
-  }.bind(this));
+  };
+  
+  if (!this.aPolylines) this.aPolylines = [];
+  for (var i = this.aCircles.length - 1; i >= 0; i--){
+    item = this.aCircles[i]
+    if (!activeUserKeys[item.key]) {
+      item.setMap(null);
+    } else {
+      var line = new GM.Polyline({
+        map: this.map,
+        path: [item.getCenter(), activeMarker.getPosition()],
+        strokeColor: '#3A2FF9',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        zIndex: 1
+      });
+
+      item.setOptions({
+        fillOpacity: 1,
+        fillColor: '#3A2FF9',
+        strokeColor: '#3A2FF9',
+        strokeWeight: 3,
+        strokeOpacity: 1,
+        zIndex: 100
+      });
+      this.aPolylines.push(line);
+    }
+  }
+}
+
+Site.Maps.prototype.resetUser = function (item) {
+  item.setOptions({
+    radius: 50000,
+    fillOpacity: 0.8,
+    fillColor: '#C42816',
+    strokeWeight: 1,
+    strokeColor: '#000',
+    strokeOpacity: 0.65,
+    zIndex: 10
+  });
+  item.setMap(this.map); // Show the user
 }
 
 Site.Maps.prototype.resetUsers = function () {
-  $.each(this.aCircles, function(_, item) {
+  for (var i = this.aCircles.length - 1; i >= 0; i--){
+    item = this.aCircles[i];
     item.setOptions({
       radius: 50000,
       fillOpacity: 0.8,
@@ -198,32 +307,49 @@ Site.Maps.prototype.resetUsers = function () {
       zIndex: 10
     });
     item.setMap(this.map); // Show the user
-  }.bind(this));
+  }
 }
 
 Site.Maps.prototype.resetEvents = function () {
-  $.each(this.aMarkers, function(_, item) {
-    item.setMap(this.map); // Show the event
-  }.bind(this));
-  
+  for (var i = this.aMarkers.length - 1; i >= 0; i--){
+    this.aMarkers[i].setMap(this.map);
+  };
+
   this.showUsers();
 }
 
+Site.Maps.prototype.removePolylines = function () {
+  if (!this.aPolylines) return;
+  for (var i = this.aPolylines.length - 1; i >= 0; i--){
+    this.aPolylines[i].setMap(null); // hide them
+  };
+
+  this.aPolylines = null;
+}
+
 Site.Maps.prototype.resetMap = function () {
+  this.removePolylines();
   this.resetUsers();
   this.resetEvents();
 }
 
 Site.Maps.prototype.showUsers = function () {
-  $.each(this.aCircles, function(_, item) {
-    item.setMap(this.map);
-  }.bind(this));
+  for (var i = this.aCircles.length - 1; i >= 0; i--){
+    this.aCircles[i].setMap(this.map);
+  };
 }
 
 Site.Maps.prototype.hideUsers = function () {
-  $.each(this.aCircles, function(_, item) {
-    item.setMap(null);
-  }.bind(this));
+  for (var i = this.aCircles.length - 1; i >= 0; i--){
+    this.aCircles[i].setMap(null);
+  };
 }
+
+Site.Maps.prototype.openUserInfo = function (evt, circle) {
+  console.log(arguments);
+  this.eventInfoWindow.open(this.map, circle);
+}
+
+
 
 var oMap = new Site.Maps();
