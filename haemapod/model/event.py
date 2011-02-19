@@ -17,7 +17,7 @@ class Event(GeoModel):
   
   def sanitize(self):
     return dict(
-      key=str(self.key()),
+      key=str(self.key()) if self.is_saved() else None,
       name=self.name,
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
