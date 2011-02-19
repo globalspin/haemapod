@@ -100,6 +100,7 @@ Site.Maps.prototype.addItemEvent = function (oResponse) {
       icon: this.markerImage,
       title: oItem.name
     });
+    marker['obj'] = oItem;
     this.aMarkers.push(marker);
   }.bind(this));
 }
@@ -118,41 +119,67 @@ Site.Maps.prototype.addItemUser = function (oResponse) {
       strokeColor: '#000',
       strokeOpacity: 0.65,
     });
+    circle['obj'] = oItem;
     this.aCircles.push(circle);
   }.bind(this));
 }
 
-Site.Maps.prototype.highlightUser = function (user) {
+Site.Maps.prototype.newUserAdded = function (user) {
+  var latLng = new GM.LatLng(user.lat, user.lng);
+  var circle = new GM.Circle({
+    center: latLng,
+    map: this.map,
+    radius: 50000,
+    fillOpacity: 0.8,
+    fillColor: '#C42816',
+    strokeWeight: 1,
+    strokeColor: '#000',
+    strokeOpacity: 0.65,
+  });
+  this.aCircles.push(circle);
+  
+  // $.each(this.aCircles, function(_, item) {
+  //   item.setMap(this.map);
+  // }.bind(this));
+}
+
+Site.Maps.prototype.newEventAdded = function (event) {
+  console.log(event);
+  var latLng = new GM.LatLng(event.lat, event.lng);
+  var marker = new GM.Marker({
+    position: latLng,
+    map: this.map,
+    icon: this.markerImage,
+    title: event.name
+  });
+  marker['obj'] = event;
+  this.aMarkers.push(marker);
+}
+
+Site.Maps.prototype.highlightUser = function (user, events) {
+  user = user || this.aCircles[4].obj;
   $.each(this.aCircles, function(_, item) {
-    item.setOptions({
-      radius: 65000,
-      fillOpacity: 0.65,
-      fillColor: '#3A2FF9',
-      strokeColor: '#3A2FF9',
-      strokeOpacity: 1,
-      zIndex: 100
-    });
+    if (item.obj.permalink == user.permalink) {
+      item.setOptions({
+        radius: 65000,
+        fillOpacity: 1,
+        fillColor: '#3A2FF9',
+        strokeColor: '#C42816',
+        strokeWeight: 3,
+        strokeOpacity: 1,
+        zIndex: 100
+      });
+    }
   }.bind(this));
 }
 
-Site.Maps.prototype.highlightEvent = function (event) {
-  event = 'test';
+Site.Maps.prototype.highlightEvent = function (event, users) {
+  event = event || this.aMarkers[4].obj;
   $.each(this.aMarkers, function(_, item) {
-    console.log(event);
-    item.setMap(null);
+    if (item.obj.permalink != event.permalink) {
+      item.setMap(null);
+    }
   }.bind(this));
-}
-
-Site.Maps.prototype.newUserAdded = function (user, events) {
-  // $.each(this.aCircles, function(_, item) {
-  //   item.setMap(this.map);
-  // }.bind(this));
-}
-
-Site.Maps.prototype.newEventAdded = function (event, users) {
-  // $.each(this.aCircles, function(_, item) {
-  //   item.setMap(this.map);
-  // }.bind(this));
 }
 
 Site.Maps.prototype.resetUsers = function () {
