@@ -76,6 +76,14 @@ $(function() {
 // History & State Management
 function state (url, no_push) {
   $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+  $.getJSON(url+(url.indexOf('?')>0?'&':'?')+'json', function (r) {
+    if (r.user && r.attending) {
+      oMap.highlightUser(r.user, r.attending);
+    }
+    if (r.event && r.attending) {
+      oMap.highlightEvent(r.event, r.attending);
+    }
+  });
   if (no_push !== 'no push') {
     history.pushState({}, undefined, url);
   }
