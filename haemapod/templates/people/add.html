@@ -1,29 +1,31 @@
-<script src="/js/geocoder.js"></script>
+{% extends "wrapper.html" %}
 
-<h2>Add yourself</h2>
-{% if handler.current_user() %}
-  <form method="post" action="/people/add" class="async">
-    <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
+{% block main %}
+  <h2>Add yourself</h2>
+  {% if handler.current_user() %}
+    <form method="post" action="/people/add" class="async">
+      <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
 
-    <p>City <input type="text" name="city" value="{{user.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
-      <span id="geocode_loading"></span>
-      <input type="hidden" name="lat" id="lat" value="{{user.location.lat or ''|escape}}">
-      <input type="hidden" name="lon" id="long" value="{{user.location.lon or ''|escape}}">
-    <p>To go to an event, I would
-      <select name="distance">
-          <option value="" {% if not user.distance %}selected="selected"{% endif %}>
-            -- choose --
-          </option>
-        {% for choice in distance_choices %}
-          <option value="{{choice[1]|escape}}" {% if user.distance ==  choice[1] %}selected="selected"{% endif %}>
-            {{choice[0]|escape}}
-          </option>
-        {% endfor %}
-      </select>
-    <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
-    <p>Private <input type="checkbox" name="private" value="1" {% if user.private %}checked="checked"{% endif %}>
-    <p><input type="submit" value="Add me to the map" {% if not user.location %}disabled="disabled"{% endif %}>
-  </form>
-{% else %}
-  {% include "sections/login.html" %}
-{% endif %}
+      <p>City <input type="text" name="city" value="{{user.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
+        <span id="geocode_loading"></span>
+        <input type="hidden" name="lat" id="lat" value="{{user.location.lat or ''|escape}}">
+        <input type="hidden" name="lon" id="long" value="{{user.location.lon or ''|escape}}">
+      <p>To go to an event, I would
+        <select name="distance">
+            <option value="" {% if not user.distance %}selected="selected"{% endif %}>
+              -- choose --
+            </option>
+          {% for choice in distance_choices %}
+            <option value="{{choice[1]|escape}}" {% if user.distance ==  choice[1] %}selected="selected"{% endif %}>
+              {{choice[0]|escape}}
+            </option>
+          {% endfor %}
+        </select>
+      <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
+      <p>Private <input type="checkbox" name="private" value="1" {% if user.private %}checked="checked"{% endif %}>
+      <p><input type="submit" value="Add me to the map" {% if not user.location %}disabled="disabled"{% endif %}>
+    </form>
+  {% else %}
+    {% include "sections/login.html" %}
+  {% endif %}
+{% endblock %}
