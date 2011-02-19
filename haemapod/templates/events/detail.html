@@ -8,7 +8,7 @@
     <p><a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a></p>
   {% endif %}
 
-  <p>{{ interested }} interested
+  <p>{{ interested_count }} people would be interested
 
   {% if attendee_count > 0 %}
   <p>{{ attendee_count }} attending:
@@ -18,7 +18,7 @@
     {% if handler.current_user().is_attending(event) %}
 
     {% else %}
-      <form action="{{event.permalink()|escape}}/attending/add" method="post">
+      <form action="{{event.permalink()|escape}}/attending/add" method="post" class="async">
         <input type="submit" value="I'm attending this">
         <input type="checkbox" name="organizer" id="organizer_chk" value="1"> <label for="organizer_chk">and organizing too!</label>
       </form>
@@ -29,7 +29,7 @@
     
   <ul>
     {% for user in attending %}
-    <li><a href="{{user.permalink()|escape}}" class="async">{{ user.preferred_name() }}</a></li>
+    <li><a href="{{user.permalink()|escape}}" class="async">{{ user.preferred_name() }}</a>
     {% if user.is_organizing(event) %} <span class="org">organizer</span> {% endif %}
     {% include "sections/user.html" %}</li>
     {% endfor %}
