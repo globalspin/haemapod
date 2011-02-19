@@ -8,5 +8,5 @@ def get(handler, response):
   lon2 = handler.request.get('lng2')
   response.events = Event.bounding_box_fetch(
     Event.all(),
-    geotypes.Box(float(lat1),float(lon1),float(lat2),float(lon2)),
+    geotypes.Box(float(lat1),float(lon2),float(lat2),float(lon1)),
   )
