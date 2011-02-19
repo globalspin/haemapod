@@ -8,6 +8,9 @@ if (typeof window.Site === "undefined") {
   window.Site = {};
 }
 
+// Google maps alias
+GM = google.maps;
+
 // Function prototype method
 Function.prototype.bind = function() {
  var __method = this, args = Array.prototype.slice.call(arguments), object = args.shift();
