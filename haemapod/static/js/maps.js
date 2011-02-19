@@ -39,6 +39,10 @@ Site.Maps.prototype.initialize = function () {
   // listen for tiles loaded
   GM.event.addListener(this.map, 'tilesloaded', this.listUsers.bind(this));
   GM.event.addListener(this.map, 'tilesloaded', this.listEvents.bind(this));
+  
+  GM.event.addListener(this.map, 'tilesloaded', function () {
+    load_page_data(document.location.href);
+  });
 }
 
 Site.Maps.prototype.getBoundingBoxCords = function (forReq) {
