@@ -18,7 +18,7 @@
   {% if handler.current_user().is_attending(event) %}
     <p>You are attending this event
   {% else %}
-    <form action="{{event.permalink()}}/add" method="post">
+    <form action="{{event.permalink()|escape}}/attending/add" method="post">
       <input type="submit" value="I'm attending">
     </form>
   {% endif %}
