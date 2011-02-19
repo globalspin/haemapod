@@ -124,7 +124,7 @@ body {
 }
 
 strong {
-  font-weight: bold;
+  font-family: 'AurulentSansBold';
 }
 
 a:link,
@@ -202,6 +202,12 @@ img.haemapod {
   float: left;
 }
 
+#map-key .what a {
+  font-family: 'AurulentSansBold';  
+  font-size: 200%;
+  text-decoration: none;
+}
+
 #map-key .key-actions {
   float: right;
 }
@@ -243,7 +249,7 @@ img.haemapod {
 
 h2, h3 {
   clear: both;
-  font-weight: bold;
+  font-family: 'AurulentSansBold';  
   margin: .5em 0 1em;
 }
 
@@ -270,7 +276,7 @@ li {
 }
 
 .section-event .name a {
-  font-weight: bold;
+  font-family: 'AurulentSansBold';  
   text-decoration: none;
   color: black;
   font-size: 110%;
@@ -310,13 +316,13 @@ li.attendee {
   padding-top: .3em;
 }
 
-li.attendee a.person {
+a.person {
   text-decoration: none;
 }
 
 /* general italicizing */
 
 p em {
-  font-style: italic;
+  font-family: 'AurulentSansItalic';
   color: gray;
 }
