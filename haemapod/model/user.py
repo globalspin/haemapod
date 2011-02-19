@@ -57,6 +57,12 @@ class User(GeoModel, search.SearchableModel):
       if ue.event.key() == event.key():
         return True
   
+  def is_organizing(self, event):
+    if not event: return
+    for ue in self.userevent_set:
+      if ue.event.key() == event.key() and ue.organizer:
+        return True
+
   def permalink(self):
     return '/people/%s' % self.key()
   

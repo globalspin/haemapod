@@ -8,6 +8,7 @@ def post(handler, response):
   if not event:
     return handler.redirect('/events')
   user = handler.current_user()
+  organizer = bool(handler.request.get('organizer'))
   if user:
-    user.add_event(event)
+    user.add_event(event, organizer)
   return handler.redirect(event.permalink())
