@@ -1,4 +1,8 @@
 {% extends "wrapper.html" %}
+{% block js %}
+<script src="/js/maps.js"></script>
+{% endblock %}
+
 {% block content %}
   Haemapod!
   {% if handler.current_user() %}
@@ -7,4 +11,6 @@
   {% else %}
   <p><a href="{{handler.login_url("/people/add")|escape}}">Add yourself</a></p>
   {% endif %}
+  
+  <div id="map_canvas"></div>
 {% endblock %}
