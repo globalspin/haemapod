@@ -1,0 +1,30 @@
+{% extends "wrapper.html" %}
+{% block content %}
+  <h2>{{ user.name }}</h2>
+  
+  <p><a href="http://{{ user.link }}">{{ user.pretty_link() }}</a></p>
+  <p>{{ user.city }}</p>
+  
+  <h3>organizer:</h3>
+  <ul>
+    {% for event in organizing %}
+    <li>
+      <p><strong>{{ event.name }}</strong></p>
+      <p>{{ event.date }}</p>
+      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+    </li>
+    {% endfor %}    
+  </ul>
+
+  <h3>attendee:</h3>
+  <ul>
+    {% for event in attending %}
+    <li>
+      <p><strong>{{ event.name }}</strong></p>
+      <p>{{ event.date }}</p>
+      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+    </li>
+    {% endfor %}    
+  </ul>
+
+{% endblock %}
