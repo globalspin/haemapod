@@ -5,6 +5,62 @@
    License: none (public domain)
 */
 
+@font-face {
+    font-family: 'Virgo01Regular';
+    src: url('/fonts/virgo/virgo-webfont.eot?') format('eot'),
+         url('/fonts/virgo/virgo-webfont.woff') format('woff'),
+         url('/fonts/virgo/virgo-webfont.ttf') format('truetype'),
+         url('/fonts/virgo/virgo-webfont.svg#webfontYTICYjiQ') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AurulentSansRegular';
+    src: url('/fonts/aurulent/AurulentSans-Regular-webfont.eot?') format('eot'),
+         url('/fonts/aurulent/AurulentSans-Regular-webfont.woff') format('woff'),
+         url('/fonts/aurulent/AurulentSans-Regular-webfont.ttf') format('truetype'),
+         url('/fonts/aurulent/AurulentSans-Regular-webfont.svg#webfontnBLuE5mt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AurulentSansItalic';
+    src: url('/fonts/aurulent/AurulentSans-Italic-webfont.eot?') format('eot'),
+         url('/fonts/aurulent/AurulentSans-Italic-webfont.woff') format('woff'),
+         url('/fonts/aurulent/AurulentSans-Italic-webfont.ttf') format('truetype'),
+         url('/fonts/aurulent/AurulentSans-Italic-webfont.svg#webfontv3ZSY7f4') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AurulentSansBold';
+    src: url('/fonts/aurulent/AurulentSans-Bold-webfont.eot?') format('eot'),
+         url('/fonts/aurulent/AurulentSans-Bold-webfont.woff') format('woff'),
+         url('/fonts/aurulent/AurulentSans-Bold-webfont.ttf') format('truetype'),
+         url('/fonts/aurulent/AurulentSans-Bold-webfont.svg#webfontesemOkSM') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AurulentSansBoldItalic';
+    src: url('/fonts/aurulent/AurulentSans-BoldItalic-webfont.eot?') format('eot'),
+         url('/fonts/aurulent/AurulentSans-BoldItalic-webfont.woff') format('woff'),
+         url('/fonts/aurulent/AurulentSans-BoldItalic-webfont.ttf') format('truetype'),
+         url('/fonts/aurulent/AurulentSans-BoldItalic-webfont.svg#webfontsWB1ou12') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -64,7 +120,7 @@ table {
 /* common site css */
 body {
   background-color: #989B9C;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'AurulentSansRegular', Helvetica, Arial, sans-serif;
 }
 
 strong {
@@ -219,6 +275,9 @@ li {
 
 .section-event .name a {
   font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 110%;
 }
 
 .section-event p {
