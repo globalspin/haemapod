@@ -1,3 +1,4 @@
+import re
 from google.appengine.ext import db
 from google.appengine.api import users
 from geo.geomodel import GeoModel
@@ -47,6 +48,10 @@ class User(GeoModel):
     else:
       return UserEvent(user=self, event=event, organizer=organizer).put()
 
+  def pretty_link(self):
+    if self.link:
+      return re.sub('twitter.com/', '@', self.link)
+  
 class UserEvent(db.Model):
   user = db.ReferenceProperty(User)
   event = db.ReferenceProperty(Event)
