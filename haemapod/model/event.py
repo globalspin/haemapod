@@ -35,6 +35,7 @@ class Event(GeoModel):
     return (ue.user for ue in self.userevent_set if ue.organizer)
   
   def interested(self, max_results=100):
+    if not self.location: return
     from user import User
     here_users = User.proximity_fetch(
       User.all().filter('distance =','here'),
