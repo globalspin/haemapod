@@ -3,7 +3,7 @@ from geo.geomodel import geotypes
 
 def get(handler, response):
   lat = handler.request.get('lat')
-  lon = handler.request.get('lon')
+  lon = handler.request.get('lgn')
   response.events = Event.proximity_fetch(
     Event.all(),
     geotypes.Point(float(lat),float(lon)),
