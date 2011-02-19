@@ -11,5 +11,8 @@ def get(handler, response):
   response.user = User.get(key)
   if not response.user:
     return handler.redirect('/people')
-  response.organizing = response.user.organizing()
-  response.attending = response.user.events()
+  response.organizing = list(response.user.organizing())
+  response.attending = list(response.user.events())
+  response.attendee_count = len(response.attending)
+  response.organizing_count = len(response.organizing)
+  

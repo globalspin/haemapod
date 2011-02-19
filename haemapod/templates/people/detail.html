@@ -5,6 +5,7 @@
 
   {% include "sections/user.html" %}
 
+  {% if organizing_count > 0 %}
   <h3>organizer:</h3>
 
   <ul>
@@ -14,7 +15,9 @@
       <li>None</li>
     {% endfor %}
   </ul>
+  {% endif %}
 
+  {% if attendee_count > 0 %}
   <h3>attendee:</h3>
 
   <ul>
@@ -24,4 +27,5 @@
       <li>None</li>
     {% endfor %}
   </ul>
+  {% endif %}
 {% endblock %}
