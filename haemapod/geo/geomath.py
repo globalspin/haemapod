@@ -37,5 +37,5 @@ def distance(p1, p2):
   """
   p1lat, p1lon = math.radians(p1.lat), math.radians(p1.lon)
   p2lat, p2lon = math.radians(p2.lat), math.radians(p2.lon)
-  return RADIUS * math.acos(math.sin(p1lat) * math.sin(p2lat) +
-      math.cos(p1lat) * math.cos(p2lat) * math.cos(p2lon - p1lon))
+  return RADIUS * math.acos(max(min(math.sin(p1lat) * math.sin(p2lat) +
+      math.cos(p1lat) * math.cos(p2lat) * math.cos(p2lon - p1lon),1),-1))
