@@ -34,7 +34,7 @@
     <p>Your URL is <a href="http://{{handler.current_user().link|escape}}">{{handler.current_user().link|escape}}</a></p>
     <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
     {% else %}
-    <p><a href="{{handler.login_url("/people/add")|escape}}">Add yourself</a></p>
+    <p><a href="/people/add">Add yourself</a></p>
     {% endif %}
   </div>
 

@@ -20,7 +20,7 @@ def post(handler, response):
 def get(handler, response):
   user = response.user = handler.current_user()
   if not user:
-    return handler.redirect('/')
+    return handler.redirect(handler.login_url())
   response.distance_choices = [
     ("stay here", "here"),
     ("drive", "drive"), 

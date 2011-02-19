@@ -1,0 +1,5 @@
+<div class="section-event">
+  <p class="name"><a href="{{event.permalink()|escape}}"><strong>{{event.name|escape}}</strong></a></p>
+  {% if event.date %}<p class="date">{{ event.date }}</p>{% endif %}
+  <p class="link"><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+</div>

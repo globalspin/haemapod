@@ -130,3 +130,13 @@ a:active {
   border-radius: 3px;
   border: 1px solid #666;
 }
+
+/* sections/event */
+
+.section-event {
+  margin: 10px 0;
+}
+
+.section-event .name a {
+  font-weight: bold;
+}
