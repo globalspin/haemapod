@@ -1,32 +1,35 @@
 <h2>{{event.name|escape}}</h2>
+<p>{{ event.city|escape }}</p>
+<p>{{ event.date|escape }}</p>
 {% if event.link %}
-  <a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a>
+  <p><a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a></p>
 {% endif %}
 
-  <ul>
-    {% for user in organizers %}
-    <li>{{ user.preferred_name() }}{% include "sections/user.html" %}</li>
-    {% else %}
-    <p>Nobody organizing
-    {% endfor %}
-  </ul>
+<p>{{ interested }} interested
 
-{% for user in attending %}
-  
-{% else %}
-  <p>Nobody attending
-{% endfor %}
+{% if attendee_count > 0 %}
+<p>{{ attendee_count }} attending:
+{% endif %}
 
-<p>{{interested}} interested
-  
 {% if handler.current_user() %}
   {% if handler.current_user().is_attending(event) %}
-    <p>You are attending this event
+
   {% else %}
     <form action="{{event.permalink()|escape}}/attending/add" method="post">
-      <input type="submit" value="I'm attending">
+      <input type="submit" value="I'm attending this">
+      <input type="checkbox" name="organizer" id="organizer_chk" value="1"> <label for="organizer_chk">and organizing too!</label>
     </form>
   {% endif %}
 {% else %}
   <p><a href="/people/add" class="async">Add yourself</a>
 {% endif %}
+
+  
+<ul>
+  {% for user in attending %}
+  <li>{{ user.preferred_name() }}
+  {% if user.is_organizing(event) %} <span class="org">organizer</span> {% endif %}
+  {% include "sections/user.html" %}</li>
+  {% endfor %}
+</ul>
+
