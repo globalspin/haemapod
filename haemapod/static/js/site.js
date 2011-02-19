@@ -18,6 +18,16 @@ Function.prototype.bind = function() {
  }
 }
 
+Function.prototype.later = function (msec)
+{
+  var fn = this,
+     args = Array.prototype.slice.call(arguments,1);
+  return window.setTimeout(
+    function(){fn.apply(this,args)},
+    msec
+  );
+}
+
 // Array prototype extension
 
 
