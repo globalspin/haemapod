@@ -10,9 +10,7 @@
   <ul>
     {% for event in organizing %}
     <li>
-      <p><a href="{{event.permalink()|escape}}"><strong>{{event.name|escape}}</strong></a></p>
-      <p>{{ event.date }}</p>
-      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+      {% include "sections/event.html" %}
     </li>
     {% endfor %}    
   </ul>
@@ -21,9 +19,7 @@
   <ul>
     {% for event in attending %}
     <li>
-      <p><a href="{{event.permalink()|escape}}"><strong>{{event.name|escape}}</strong></a></p>
-      <p>{{ event.date }}</p>
-      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+      {% include "sections/event.html" %}
     </li>
     {% endfor %}    
   </ul>
