@@ -1,0 +1,3 @@
+[submodule "vendor/megaera"]
+	path = vendor/megaera
+	url = git://github.com/tantalor/megaera.git
