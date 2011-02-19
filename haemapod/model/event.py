@@ -13,5 +13,5 @@ class Event(GeoModel):
     return dict(
       name=self.name,
       lat=self.location.lat if self.location else None,
-      lgn=self.location.lon if self.location else None,
+      lng=self.location.lon if self.location else None,
     )
