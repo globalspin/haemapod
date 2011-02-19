@@ -1,27 +1,33 @@
-{% extends "wrapper.html" %}
-{% block content %}
-  <h2>{{ user.name }}</h2>
-  
-  <p><img src="{{ user.gravatar() }}" width=40 height=40 />
-  <p><a href="http://{{ user.link }}">{{ user.pretty_link() }}</a></p>
-  <p>{{ user.city }}</p>
-  
-  <h3>organizer:</h3>
-  <ul>
-    {% for event in organizing %}
-    <li>
-      {% include "sections/event.html" %}
-    </li>
-    {% endfor %}    
-  </ul>
+<h2><a href="{{user.permalink()|escape}}" class="async">{{user.preferred_name()|escape}}</a></h2>
 
-  <h3>attendee:</h3>
-  <ul>
-    {% for event in attending %}
-    <li>
-      {% include "sections/event.html" %}
-    </li>
-    {% endfor %}    
-  </ul>
+<div class="user-details">
+  <p class="gravatar"><img src="{{user.gravatar()|escape}}" width="40" height="40">
 
-{% endblock %}
+  {% if user.link %}
+    <p class="link"><a href="http://{{user.link|escape}}">{{user.pretty_link()|escape}}</a>
+  {% endif %}
+
+  {% if user.city %}
+    <p class="city">{{user.city|escape}}</p>
+  {% endif %}
+</div>
+
+<h3>Organizing</h3>
+
+<ul>
+  {% for event in organizing %}
+    <li>{% include "sections/event.html" %}</li>
+  {% else %}
+    <li>None</li>
+  {% endfor %}
+</ul>
+
+<h3>Attending</h3>
+
+<ul>
+  {% for event in attending %}
+    <li>{% include "sections/event.html" %}</li>
+  {% else %}
+    <li>None</li>
+  {% endfor %}
+</ul>

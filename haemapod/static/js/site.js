@@ -44,8 +44,16 @@ Function.prototype.later = function (msec)
 
 // User Interface
 $(function() {
-  $('.add-yourself').click(function (evt) {
+  $('.async').live('click', function (evt) {
     evt.preventDefault();
     $('#main').load(this.href);
+  });
+  $('form[action="/people/add"]').live('submit', function (evt) {
+    evt.preventDefault();
+    $.post(this.action+'?json', $(this).serialize(), function (r) {
+      if (r.user && r.user.permalink) {
+        $('#main').load(r.user.permalink);
+      }
+    }, 'json');
   });
 });

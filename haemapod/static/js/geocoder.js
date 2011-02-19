@@ -8,6 +8,6 @@ function geocode(city, lat_id, long_id){
       $('#'+long_id).val(long);
       $('#'+lat_id).val(lat);
       $('#geocode_loading').html('');
-      $('[type=submit]').show();
+      $('[type=submit]').attr({disabled:false});
     });
 }

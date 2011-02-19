@@ -131,6 +131,12 @@ a:active {
   border: 1px solid #666;
 }
 
+h2, h3 {
+  clear: both;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
 /* sections/event */
 
 .section-event {
@@ -139,4 +145,15 @@ a:active {
 
 .section-event .name a {
   font-weight: bold;
+}
+
+/* user details */
+
+.user-details {
+  margin: 20px 0;
+}
+
+.user-details p.gravatar {
+  float: left;
+  margin-right: 10px;
 }

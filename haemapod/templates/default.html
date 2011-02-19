@@ -14,7 +14,7 @@
         <li>
           <span class="circle"></span>
           <strong>People -</strong> 
-          <a href="/people/add" class="add-yourself">add yourself</a> -
+          <a href="/people/add" class="async">add yourself</a> -
           <a href="#" id="find-someone">find someone</a>
         </li>
         <li>
@@ -38,7 +38,7 @@
         <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
       {% endif %}
     {% else %}
-    <p><a href="/people/add" class="add-yourself">Add yourself</a></p>
+    <p><a href="/people/add" class="async">Add yourself</a></p>
     {% endif %}
   </div>
 
