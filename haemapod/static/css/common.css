@@ -113,11 +113,18 @@ a:active {
   padding-left: 14px;
   padding-right: 14px;
   padding-top: 14px;
+  position: relative;
 }
 
 #footer {
   margin: 2em 15px 0 15px;
   font-size: small;
+}
+
+img.haemapod {
+  position: absolute;
+  right: 30px;
+  bottom: 15px;
 }
 
 #footer p {
