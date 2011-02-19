@@ -1,4 +1,5 @@
 from model import Event
+from google.appengine.ext import db
 
 def post(handler, response):
   key = handler.request.get('key')
