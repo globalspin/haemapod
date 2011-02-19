@@ -1,17 +1,22 @@
 <h2>{{event.name|escape}}</h2>
 {% if event.link %}
-  <a href="{{event.link|escape}}">{{event.link|escape}}</a>
+  <a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a>
 {% endif %}
+
+  <ul>
+    {% for user in organizers %}
+    <li>{{ user.preferred_name() }}{% include "sections/user.html" %}</li>
+    {% else %}
+    <p>Nobody organizing
+    {% endfor %}
+  </ul>
+
 {% for user in attending %}
   
 {% else %}
   <p>Nobody attending
 {% endfor %}
-{% for user in organizers %}
-  
-{% else %}
-  <p>Nobody organizing
-{% endfor %}
+
 <p>{{interested}} interested
   
 {% if handler.current_user() %}
