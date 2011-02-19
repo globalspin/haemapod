@@ -13,4 +13,8 @@ class User(db.Model):
   link = db.StringProperty()
   private = db.BooleanProperty()
 
-  
+  def preferred_name(self):
+    if self.name:
+      return self.name
+    if self.user.nickname():
+      return self.user.nickname()
