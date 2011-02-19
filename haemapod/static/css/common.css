@@ -24,6 +24,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  line-height: 130%;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -89,6 +90,8 @@ a:active {
 .col-left {
   width: 350px;
   margin: 0 15px;
+  height: 450px;
+  overflow-y: auto;
 }
 
 .col-right {
@@ -99,17 +102,26 @@ a:active {
 
 #outer {
   width: 1200px;
-  margin: 0 auto;
+  margin: 2em auto;
   background-color: #FFF;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 4px 0px, rgba(0, 0, 0, 0.0976562) 0px 0px 40px 0px inset;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-origin: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 4px 0px, rgba(0, 0, 0, 0.0976562) 0px 0px 40px 0px inset;
+  padding-bottom: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 14px;
 }
 
-#inner {
-  padding: 20px;
-  background-color: #FFF;
+#footer {
+  margin: 2em 15px 0 15px;
+  font-size: small;
 }
 
-#content {
-  padding: 15px 0;
+#footer p {
+  margin: 0;
 }
 
 #map_canvas { 
@@ -120,7 +132,6 @@ a:active {
 #map-key {
   padding: 10px 0;
   margin: 0 10px 15px 10px;
-  border-top: 1px solid #333;
   border-bottom: 1px solid #333;
 }
 
@@ -170,6 +181,10 @@ h2, h3 {
   margin: .5em 0 1em;
 }
 
+h2 {
+  font-size: 120%;
+}
+
 p {
   margin-bottom: 1em;
 }
@@ -199,6 +214,7 @@ li {
 /* user details */
 
 .user-details {
+  margin-top: .2em;
   margin-bottom: 1em;
 }
 
@@ -211,3 +227,27 @@ li {
   margin: 0;
 }
 
+/* event details */
+p.cityinfo span {
+  display: block;
+}
+
+span.org {
+  color: #F93;
+  font-size: 80%;
+}
+
+li.attendee {
+  padding-top: .3em;
+}
+
+li.attendee a.person {
+  text-decoration: none;
+}
+
+/* general italicizing */
+
+p em {
+  font-style: italic;
+  color: gray;
+}

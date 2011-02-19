@@ -21,11 +21,10 @@
   </head>
   <body>
     <div id="outer" class="">
-      {#% include "sections/header.html" %#}
       <div id="content">
         <div id="map-key">
           <div class="what">
-            <a href="/"><strong>SpaceUp</strong>	
+            <a href="/" class="async"><strong>SpaceUp</strong>	
             unconference map</a>
           </div>
           <div class="key-actions">
@@ -56,7 +55,15 @@
         </div>
         <div class="cleaner"></div>
       </div>
-      {% include "sections/footer.html" %}
+      <div id="footer">
+        {% if handler.current_user() %}
+          <p>
+            You are
+            <a href="{{handler.current_user().permalink()|escape}}">
+              {{handler.current_user().preferred_name()|escape}}</a>
+            <a href="{{handler.logout_url()|escape}}">(log out)</a>
+        {% endif %}
+      </div>
     </div>
   </body>
 {% endif %}
