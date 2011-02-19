@@ -271,6 +271,9 @@ li {
 
 .section-event .name a {
   font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 110%;
 }
 
 .section-event p {
