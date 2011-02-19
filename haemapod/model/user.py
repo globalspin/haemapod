@@ -21,5 +21,5 @@ class User(GeoModel):
     return dict(
       name=self.preferred_name(),
       lat=self.location.lat if self.location else None,
-      lon=self.location.lon if self.location else None,
+      lgn=self.location.lon if self.location else None,
     )
