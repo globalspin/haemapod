@@ -3,12 +3,13 @@ import urllib, hashlib
 from google.appengine.ext import db
 from google.appengine.api import users
 from geo.geomodel import GeoModel
+from google.appengine.ext import search
 
 from re import sub
 
 from event import Event
 
-class User(GeoModel):
+class User(GeoModel, search.SearchableModel):
   name = db.StringProperty()
   city = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)
