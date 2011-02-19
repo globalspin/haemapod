@@ -33,28 +33,27 @@ class Event(GeoModel):
   def organizers(self):
     return (ue.user for ue in self.userevent_set if ue.organizer)
   
-  def interested(self, query=None, max_results=100):
+  def interested(self, max_results=100):
     from user import User
-    if not query: query = User.all()
     here_users = User.proximity_fetch(
-      query.filter('distance =','here'),
+      User.all().filter('distance =','here'),
       self.location,
       max_results=max_results,
       max_distance=HERE_RADIUS,
     )
     drive_users = User.proximity_fetch(
-      query.filter('distance =','drive'),
+      User.all().filter('distance =','drive'),
       self.location,
       max_results=max_results,
       max_distance=DRIVE_RADIUS,
     )
     fly_users = User.proximity_fetch(
-      query.filter('distance =','fly'),
+      User.all().filter('distance =','fly'),
       self.location,
       max_results=max_results,
       max_distance=FLY_RADIUS,
     )
-    anywhere_users = query.filter('distance =','anywhere').fetch(max_results)
+    anywhere_users = User.all().filter('distance =','anywhere').fetch(max_results)
     return dict(
       here_users=here_users,
       drive_users=drive_users,
