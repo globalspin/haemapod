@@ -9,14 +9,20 @@ Site.Maps = function (oArgs) {
 
 Site.Maps.prototype.setup = function () {
   // create the map
-  this.latlng = new google.maps.LatLng(this.initialLat, this.initialLng);
+  this.latlng = new GM.LatLng(this.initialLat, this.initialLng);
+  
+  this.markerImage = new GM.MarkerImage('/images/spaceup-pin-18x30.png',
+    new GM.Size(18, 30),  // size
+    new GM.Point(0,0),    // origin
+    new GM.Point(9, 30)   // anchor
+  );
   
   // set up the map options
   this.mapOptions = {
     zoom: this.zoom,
     center: this.latlng,
-    mapTypeId: google.maps.MapTypeId[this.mapType],
-    backgroundColor: '#FFF',
+    mapTypeId: GM.MapTypeId[this.mapType],
+    backgroundColor: '#AEAEAE',
     disableDefaultUI: 1,
     draggable: false,
     scrollwheel: false
@@ -26,11 +32,11 @@ Site.Maps.prototype.setup = function () {
 }
 
 Site.Maps.prototype.initialize = function () {
-  this.map = new google.maps.Map($('#map_canvas').get(0), this.mapOptions);
+  this.map = new GM.Map($('#map_canvas').get(0), this.mapOptions);
   
   // listen for tiles loaded
-  google.maps.event.addListener(this.map, 'tilesloaded', oMap.listUsers.bind(this));
-  google.maps.event.addListener(this.map, 'tilesloaded', oMap.listEvents.bind(this));
+  GM.event.addListener(this.map, 'tilesloaded', oMap.listUsers.bind(this));
+  GM.event.addListener(this.map, 'tilesloaded', oMap.listEvents.bind(this));
 }
 
 Site.Maps.prototype.getBoundingBoxCords = function (forReq) {
@@ -85,10 +91,11 @@ Site.Maps.prototype.listEvents = function () {
 Site.Maps.prototype.addItemMarkers = function (oResponse) {
   var oItems = oResponse.users || oResponse.events;
   $.each(oItems, function(_, oItem){
-    var latLng = new google.maps.LatLng(oItem.lat, oItem.lng);
-    var marker = new google.maps.Marker({
+    var latLng = new GM.LatLng(oItem.lat, oItem.lng);
+    var marker = new GM.Marker({
       position: latLng,
       map: this.map,
+      icon: this.markerImage,
       title: oItem.name
     });
   }.bind(this));
@@ -97,8 +104,8 @@ Site.Maps.prototype.addItemMarkers = function (oResponse) {
 Site.Maps.prototype.addItemCircle = function (oResponse) {
   var oItems = oResponse.users || oResponse.events;
   $.each(oItems, function(_, oItem){
-    var latLng = new google.maps.LatLng(oItem.lat, oItem.lng);
-    var marker = new google.maps.Circle({
+    var latLng = new GM.LatLng(oItem.lat, oItem.lng);
+    var marker = new GM.Circle({
       center: latLng,
       map: this.map,
       radius: 50000,
@@ -106,7 +113,7 @@ Site.Maps.prototype.addItemCircle = function (oResponse) {
       fillColor: '#C42816',
       strokeWeight: 1,
       strokeColor: '#000',
-      strokeOpacity: 0.65
+      strokeOpacity: 0.65,
     });
   }.bind(this));
 }

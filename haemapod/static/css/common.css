@@ -109,7 +109,7 @@ a:active {
 }
 
 #content {
-  padding-top: 15px;
+  padding: 15px 0;
 }
 
 #map_canvas { 
