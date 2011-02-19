@@ -1,27 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}haemapod{% endblock %}</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  {% block head %}{% endblock head%}
+{% if handler.has_param('_main') %}
+  {{self.main()}}
+{% else %}
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}haemapod{% endblock %}</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    {% block head %}{% endblock head%}
 
-  <script src="/js/jquery-1.5.min.js"></script>
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script src="/js/site.js"></script>
-  {% block js %}{% endblock %}
+    <script src="/js/jquery-1.5.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="/js/site.js"></script>
+    <script src="/js/maps.js"></script>
+    <script src="/js/geocoder.js"></script>
   
-  <link rel="stylesheet" href="/css/common.css" />
-  {% block css %}{% endblock %}
-  <!-- Date: 2011-02-18 -->
-</head>
-<body>
-  <div id="outer" class="">
-    {#% include "sections/header.html" %#}
-    <div id="content">
-      {% block content %}{% endblock %}
-      <div class="cleaner"></div>
+    <link rel="stylesheet" href="/css/common.css" />
+    {% block css %}{% endblock %}
+    <!-- Date: 2011-02-18 -->
+  </head>
+  <body>
+    <div id="outer" class="">
+      {#% include "sections/header.html" %#}
+      <div id="content">
+        <div id="map-key">
+          <div class="what">
+            <strong>SpaceUp</strong>	
+            unconference map
+          </div>
+          <div class="key-actions">
+            <ul>
+              <li>
+                <span class="circle"></span>
+                <strong>People -</strong> 
+                <a href="/people/add" class="async">add yourself</a> -
+                <a href="/people" class="async">find someone</a>
+              </li>
+              <li>
+                <span class="marker"></span>
+                <strong>SpaceUps -</strong> 
+                <a href="/events/add" class="async">add one</a> -
+                <a href="/events" class="async">browse</a>
+              </li>
+            </ul>
+          </div>
+          <div class="cleaner"></div>
+        </div>
+      
+        <div class="col-left" id="main">
+          {% block main %}{% endblock %}
+        </div>
+
+        <div class="col-right">
+          {% include 'sections/map.html' %}
+        </div>
+        <div class="cleaner"></div>
+      </div>
+      {% include "sections/footer.html" %}
     </div>
-    {% include "sections/footer.html" %}
-  </div>
-</body>
+  </body>
+{% endif %}

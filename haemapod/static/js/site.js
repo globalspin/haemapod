@@ -49,18 +49,29 @@ Function.prototype.later = function (msec)
 $(function() {
   $('a.async').live('click', function (evt) {
     evt.preventDefault();
-    $('#main').load(this.href);
+    state(this.href);
   });
   $('form.async').live('submit', function (evt) {
     evt.preventDefault();
     if (this.method == 'post') {
-      $.post(this.action+'?json', $(this).serialize(), function (r) {
+      var action = this.action;
+      $.post(action+'?json', $(this).serialize(), function (r) {
+        if (/\/people\/add/.test(action) && r.user) {
+          oMap.newUserAdded(r.user);
+        }
+        if (/\/events\/add/.test(action) && r.event) {
+          oMap.newEventAdded(r.event);
+        }
         if (r.redirect) {
-          $('#main').load(r.redirect);
+          state(r.redirect);
         }
       }, 'json');
     } else {
-      $('#main').load(this.action+'?'+$(this).serialize());
+      state(this.action+'?'+$(this).serialize());
     }
   });
 });
+
+function state (url, no_push) {
+  $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+}
