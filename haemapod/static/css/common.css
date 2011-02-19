@@ -113,22 +113,26 @@ a:active {
   padding-left: 14px;
   padding-right: 14px;
   padding-top: 14px;
-  position: relative;
 }
 
 #footer {
-  margin: 2em 15px 0 15px;
-  font-size: small;
+  position: relative;
+  margin: 0 15px;
+  height: 35px;
 }
 
-img.haemapod {
+#footer .haemapod {
   position: absolute;
-  right: 30px;
-  bottom: 15px;
+  right: 0;
+  bottom: 0;
 }
 
 #footer p {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   margin: 0;
+  font-size: small;
 }
 
 #map_canvas { 
