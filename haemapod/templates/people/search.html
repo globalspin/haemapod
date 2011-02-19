@@ -1,12 +1,12 @@
 <h2>SpaceUp People</h2>
 
 <form action="/people" class="async">
-  <p><input type="text" name="q" value="{{query or ''|escape}}"></p>
-  <p><input type="submit" value="Search"></p>
+  <p><input type="text" name="q" value="{{query or ''|escape}}">
+  <input type="submit" value="Search"></p>
 </form>
 <ul>
   {% for user in users %}
-  <li>{% include "sections/user.html" %}</li>
+  <li>{{ user.preferred_name() }}{% include "sections/user.html" %}</li>
   {% else %}
     {% if query %}<li>No results</li>{% endif %}
   {% endfor %}    

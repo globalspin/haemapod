@@ -1,43 +1,11 @@
 {% extends "wrapper.html" %}
-{% block js %}
-<script src="/js/maps.js"></script>
-{% endblock %}
 
-{% block content %}
-  <div id="map-key">
-    <div class="what">
-      <strong>SpaceUp</strong>	
-      unconference map
-    </div>
-    <div class="key-actions">
-      <ul>
-        <li>
-          <span class="circle"></span>
-          <strong>People -</strong> 
-          <a href="/people/add" class="async">add yourself</a> -
-          <a href="/people" class="async">find someone</a>
-        </li>
-        <li>
-          <span class="marker"></span>
-          <strong>SpaceUps -</strong> 
-          <a href="/events/add" class="async">add one</a> -
-          <a href="/events" class="async">browse</a>
-        </li>
-      </ul>
-    </div>
-    <div class="cleaner"></div>
-  </div>
-  <div class="col-left" id="main">
-    {% if state %}
-      {% include state+".html" %}
-    {% else %}
-      <p>SpaceUp is a thing. This text explains the concept of the thing.
-        
-      <p>This text explains the map. Not that it needs a lot of explaining, but you never know.
-    {% endif %}
-  </div>
-
-  <div class="col-right">
-    {% include 'sections/map.html' %}
-  </div>
+{% block main %}
+  {% if state %}
+    {% include state+".html" %}
+  {% else %}
+    <p>SpaceUp is a thing. This text explains the concept of the thing.
+  
+    <p>This text explains the map. Not that it needs a lot of explaining, but you never know.
+  {% endif %}
 {% endblock %}
