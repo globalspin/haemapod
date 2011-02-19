@@ -145,6 +145,10 @@ ul {
   margin-bottom: 1em;
 }
 
+li {
+  clear: both;
+}
+
 /* sections/event */
 
 .section-event {

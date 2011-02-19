@@ -50,10 +50,14 @@ $(function() {
   });
   $('form.async').live('submit', function (evt) {
     evt.preventDefault();
-    $.post(this.action+'?json', $(this).serialize(), function (r) {
-      if (r.redirect) {
-        $('#main').load(r.redirect);
-      }
-    }, 'json');
+    if (this.method == 'post') {
+      $.post(this.action+'?json', $(this).serialize(), function (r) {
+        if (r.redirect) {
+          $('#main').load(r.redirect);
+        }
+      }, 'json');
+    } else {
+      $('#main').load(this.action+'?'+$(this).serialize());
+    }
   });
 });

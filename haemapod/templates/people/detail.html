@@ -1,16 +1,6 @@
 <h2>{{user.preferred_name()|escape}}</h2>
 
-<div class="user-details">
-  <p class="gravatar"><img src="{{user.gravatar()|escape}}" width="40" height="40">
-
-  {% if user.link %}
-    <p class="link"><a href="http://{{user.link|escape}}">{{user.pretty_link()|escape}}</a>
-  {% endif %}
-
-  {% if user.city %}
-    <p class="city">{{user.city|escape}}</p>
-  {% endif %}
-</div>
+{{include "sections/user.html"}}
 
 <h3>Organizing</h3>
 
