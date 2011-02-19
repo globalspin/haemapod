@@ -48,6 +48,7 @@ Function.prototype.later = function (msec)
 // User Interface
 $(function() {
   $('a.async').live('click', function (evt) {
+    if (evt.ctrlKey || evt.shitKey || evt.altKey || evt.metaKey) return;
     evt.preventDefault();
     state(this.href);
   });
