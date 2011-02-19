@@ -14,6 +14,7 @@ def application():
     ('/events/proximity', RequestHandler.with_page('handlers.events.proximity')),
     ('/events/bounding_box', RequestHandler.with_page('handlers.events.bounding_box')),
     ('/events/users', RequestHandler.with_page('handlers.events.users')),
+    ('/events/upload', RequestHandler.with_page('handlers.events.upload')),
   ], debug=True)
 
 def main():
