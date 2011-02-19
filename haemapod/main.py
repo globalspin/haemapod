@@ -12,6 +12,7 @@ def application():
     ('/events/add', RequestHandler.with_page('handlers.events.add')),
     ('/events/proximity', RequestHandler.with_page('handlers.events.proximity')),
     ('/events/bounding_box', RequestHandler.with_page('handlers.events.bounding_box')),
+    ('/events/users', RequestHandler.with_page('handlers.events.users')),
   ], debug=True)
 
 def main():
