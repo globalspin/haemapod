@@ -15,3 +15,9 @@ class Event(GeoModel):
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
     )
+  
+  def attending(self):
+    return (ue.user for ue in self.userevent_set)
+  
+  def organizers(self):
+    return (ue.user for ue in self.userevent_set if ue.organizer)
