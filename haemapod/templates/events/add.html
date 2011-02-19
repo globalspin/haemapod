@@ -12,6 +12,6 @@
       <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
     <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
     <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
-    <p><input type="submit" value="Add me to the map" style="display:none">
+    <p><input type="submit" value="Add me to the map" {% if not event.location %}style="display:none"{% endif %}>
   </form>
 {% endblock %}

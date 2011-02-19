@@ -22,6 +22,6 @@
         {% endfor %}
       </select>
     <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
-    <p><input type="submit" value="Add me to the map" style="display:none">
+    <p><input type="submit" value="Add me to the map" {% if not user.location %}style="display:none"{% endif %}>
   </form>
 {% endblock %}
