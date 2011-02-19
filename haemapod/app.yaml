@@ -17,5 +17,8 @@ handlers:
 - url: /images
   static_dir: static/images
 
+- url: /fonts
+  static_dir: static/fonts
+
 - url: .*
   script: main.py
