@@ -2,8 +2,9 @@ from google.appengine.ext import db
 from google.appengine.api import users
 from geo.geomodel import GeoModel
 
+from re import sub
+
 class User(GeoModel):
-  user = db.UserProperty(required=True)
   name = db.StringProperty()
   city = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)
@@ -14,8 +15,9 @@ class User(GeoModel):
   def preferred_name(self):
     if self.name:
       return self.name
-    if self.user.nickname():
-      return self.user.nickname()
+    key_name = self.key().name()
+    key_name = sub('@.*$', '', key_name) # obscure domain
+    return key_name
   
   def sanitize(self):
     return dict(
