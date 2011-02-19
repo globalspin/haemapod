@@ -10,6 +10,8 @@ def application():
     ('/people/proximity', RequestHandler.with_page('handlers.people.proximity')),
     ('/people/bounding_box', RequestHandler.with_page('handlers.people.bounding_box')),
     ('/events/add', RequestHandler.with_page('handlers.events.add')),
+    ('/events/proximity', RequestHandler.with_page('handlers.events.proximity')),
+    ('/events/bounding_box', RequestHandler.with_page('handlers.events.bounding_box')),
   ], debug=True)
 
 def main():
