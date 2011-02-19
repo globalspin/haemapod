@@ -71,7 +71,7 @@ class User(GeoModel, search.SearchableModel):
       return re.sub('twitter.com/', '@', self.link)
   
   def gravatar(self):
-    default = "http://0.gravatar.com/avatar/1a33e7a69df4f675fcd799edca088ac2?s=40&d=identicon"
+    default = "http://globalspin.com/images/default-gravatar.jpg"
     size = 40
 
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.email.lower()).hexdigest() + "?"
