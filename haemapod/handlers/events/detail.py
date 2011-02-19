@@ -10,6 +10,9 @@ def get(handler, response):
   response.attending = list(event.attending())
   response.organizers = list(event.organizers())
   response.interested = event.interested()
-  response.interested_count = sum(len(d) for d in response.interested.values())
+  if response.interested:
+    response.interested_count = sum(len(d) for d in response.interested.values())
+  else:
+    response.interested_count = 0
   response.attendee_count = len(response.attending)
   response.organizers_count = len(response.organizers)

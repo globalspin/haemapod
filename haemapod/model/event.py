@@ -17,7 +17,7 @@ class Event(GeoModel):
   
   def sanitize(self):
     return dict(
-      key=str(self.key()),
+      key=str(self.key()) if self.is_saved() else None,
       name=self.name,
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
@@ -35,6 +35,7 @@ class Event(GeoModel):
     return (ue.user for ue in self.userevent_set if ue.organizer)
   
   def interested(self, max_results=100):
+    if not self.location: return
     from user import User
     here_users = User.proximity_fetch(
       User.all().filter('distance =','here'),

@@ -124,7 +124,7 @@ body {
 }
 
 strong {
-  font-weight: bold;
+  font-family: 'AurulentSansBold';
 }
 
 a:link,
@@ -206,6 +206,12 @@ a:active {
   float: left;
 }
 
+#map-key .what a {
+  font-family: 'AurulentSansBold';  
+  font-size: 200%;
+  text-decoration: none;
+}
+
 #map-key .key-actions {
   float: right;
 }
@@ -247,7 +253,7 @@ a:active {
 
 h2, h3 {
   clear: both;
-  font-weight: bold;
+  font-family: 'AurulentSansBold';  
   margin: .5em 0 1em;
 }
 
@@ -267,6 +273,33 @@ li {
   clear: both;
 }
 
+/* forms */
+
+form p {
+  position: relative;
+}
+
+form input,
+form select {
+  font-size: 1em;
+}
+
+form input[type=text] {
+  border: solid #AAA;
+  border-width: 0 0 1px 0;
+  padding: 0 5px;
+}
+
+#geocode_loading {
+  width: 16px;
+  height: 16px;
+  background: url('/images/throbber.gif') no-repeat;
+  visibility: hidden;
+  display: inline-block;
+  right: 0;
+  top: 0;
+}
+
 /* sections/event */
 
 .section-event {
@@ -274,7 +307,7 @@ li {
 }
 
 .section-event .name a {
-  font-weight: bold;
+  font-family: 'AurulentSansBold';  
   text-decoration: none;
   color: black;
   font-size: 110%;
@@ -314,13 +347,13 @@ li.attendee {
   padding-top: .3em;
 }
 
-li.attendee a.person {
+a.person {
   text-decoration: none;
 }
 
 /* general italicizing */
 
 p em {
-  font-style: italic;
+  font-family: 'AurulentSansItalic';
   color: gray;
 }
