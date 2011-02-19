@@ -8,8 +8,8 @@
 
       <p><label for="city">City</label> <input type="text" name="city" id="city" value="{{event.city or ''|escape}}">
         <span id="geocode_loading"></span>
-        <input type="hidden" name="lat" id="lat" value="{{user.location.lat or ''|escape}}">
-        <input type="hidden" name="lon" id="lon" value="{{user.location.lon or ''|escape}}">
+        <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
+        <input type="hidden" name="lon" id="lon" value="{{event.location.lon or ''|escape}}">
       <p><label for="date">Date</label> <input type="text" name="date" id="date" value="{{event.date or ''|escape}}">
 
       <p><label for="slug">Slug</label> <input type="text" name="slug" id="slug" value="{{event.slug or ''|escape}}">
