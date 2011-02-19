@@ -192,6 +192,10 @@ li {
   font-weight: bold;
 }
 
+.section-event p {
+  margin-bottom: .2em;
+}
+
 /* user details */
 
 .user-details {

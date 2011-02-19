@@ -6,3 +6,6 @@
   </li>
   {% endfor %}    
 </ul>
+{% if next %}
+  <a href="/events?next={{next.key()|escape}}" class="async">next &rarr;</a>
+{% endif %}
