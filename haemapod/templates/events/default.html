@@ -2,10 +2,12 @@
 {% block content %}
   <h2>SpaceUp Events</h2>
   <ul>
+    {% for event in events %}
     <li>
-      <p><strong>SpaceUp San Diego 2011</strong></p>
-      <p>January 2011</p>
-      <p><a href="http://twitter.com/SpaceUpSanDiego">@SpaceUpSanDiego</a></p>
+      <p><strong>{{ event.name }}</strong></p>
+      <p>{{ event.date }}</p>
+      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
     </li>
+    {% endfor %}    
   </ul>
 {% endblock %}

@@ -1,3 +1,4 @@
+import re
 from google.appengine.ext import db
 from geo.geomodel import GeoModel
 
@@ -15,3 +16,7 @@ class Event(GeoModel):
       lat=self.location.lat if self.location else None,
       lgn=self.location.lon if self.location else None,
     )
+
+  def pretty_link(self):
+    if self.link:
+      return re.sub('twitter.com/', '@', self.link)
