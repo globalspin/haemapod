@@ -56,4 +56,12 @@ $(function() {
       }
     }, 'json');
   });
+  $('form[action="/events/add"]').live('submit', function (evt) {
+    evt.preventDefault();
+    $.post(this.action+'?json', $(this).serialize(), function (r) {
+      if (r.event && r.event.permalink) {
+        $('#main').load(r.event.permalink);
+      }
+    }, 'json');
+  });
 });

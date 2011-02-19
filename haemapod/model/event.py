@@ -20,6 +20,7 @@ class Event(GeoModel):
       name=self.name,
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
+      permalink=self.permalink(),
     )
 
   def pretty_link(self):
