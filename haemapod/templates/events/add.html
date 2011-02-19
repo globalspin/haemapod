@@ -1,7 +1,7 @@
 <script src="/js/geocoder.js"></script>
 
 <h2>Add your event</h2>
-<form method="post" action="/events/add">
+<form method="post" action="/events/add" class="async">
   <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
 
   <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
