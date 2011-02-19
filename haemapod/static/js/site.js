@@ -72,6 +72,19 @@ $(function() {
   });
 });
 
+// History & State Management
 function state (url, no_push) {
   $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+  if (no_push !== 'no push') {
+    history.pushState({}, undefined, url);
+  }
+}
+
+var had_first_pop;
+window.onpopstate = function (evt) {
+  // skip the first pop
+  if (had_first_pop) {
+    state(document.location.href, 'no push');
+  }
+  had_first_pop = true;
 }
