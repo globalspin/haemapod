@@ -1,1 +1,9 @@
-/people/add
+{% extends "wrapper.html" %}
+{% block content %}
+  <h2>Add yourself</h2>
+  <form method="post">
+    <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
+    <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
+    <p><input type="submit" value="Add me to the map">
+  </form>
+{% endblock %}
