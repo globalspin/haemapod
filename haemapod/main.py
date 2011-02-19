@@ -7,7 +7,7 @@ def application():
   return WSGIApplication([
     ('/', RequestHandler.with_page('handlers.default')),
     ('/people/add', RequestHandler.with_page('handlers.people.add')),
-    ('/people/detail', RequestHandler.with_page('handlers.people.detail')),
+    ('/people/([^/]*)$', RequestHandler.with_page('handlers.people.detail')),
     ('/people/proximity', RequestHandler.with_page('handlers.people.proximity')),
     ('/people/bounding_box', RequestHandler.with_page('handlers.people.bounding_box')),
     ('/people/upload', RequestHandler.with_page('handlers.people.upload')),
