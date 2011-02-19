@@ -2,11 +2,16 @@
 
 {% block main %}
   <h2>{{event.name|escape}}</h2>
-  <p>{{ event.city|escape }}</p>
-  <p>{{ event.date|escape }}</p>
-  {% if event.link %}
-    <p><a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a></p>
+  <p class="cityinfo"><span>{{ event.city|escape }}</span>
+  {% if event.date %}
+    <span>{{ event.date|escape }}</span>
+  {% else %}
+    <span><em>No date set yet.</em></span>
   {% endif %}
+  {% if event.link %}
+    <span><a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a></span>
+  {% endif %}
+  </p>
 
   <p>{{ interested }} people would be interested
 
@@ -29,7 +34,7 @@
     
   <ul>
     {% for user in attending %}
-    <li><a href="{{user.permalink()|escape}}" class="async">{{ user.preferred_name() }}</a>
+    <li class="attendee"><a href="{{user.permalink()|escape}}" class="async person">{{ user.preferred_name() }}</a>
     {% if user.is_organizing(event) %} <span class="org">organizer</span> {% endif %}
     {% include "sections/user.html" %}</li>
     {% endfor %}
