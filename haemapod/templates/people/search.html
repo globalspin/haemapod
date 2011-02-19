@@ -9,7 +9,7 @@
   </form>
   <ul>
     {% for user in users %}
-    <li>{{ user.preferred_name() }}{% include "sections/user.html" %}</li>
+    <li><a href="{{user.permalink()|escape}}" class="async">{{ user.preferred_name() }}</a> {% include "sections/user.html" %}</li>
     {% else %}
       {% if query %}<li>No results</li>{% endif %}
     {% endfor %}    
