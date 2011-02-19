@@ -40,3 +40,12 @@ Function.prototype.later = function (msec)
 
 
 // Additional common function
+
+
+// User Interface
+$(function() {
+  $('.add-yourself').click(function (evt) {
+    evt.preventDefault();
+    $('#main').load(this.href);
+  });
+});

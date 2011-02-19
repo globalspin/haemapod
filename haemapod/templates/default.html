@@ -14,7 +14,7 @@
         <li>
           <span class="circle"></span>
           <strong>People -</strong> 
-          <a href="#" id="add-yourself">add yourself</a> -
+          <a href="/people/add" class="add-yourself">add yourself</a> -
           <a href="#" id="find-someone">find someone</a>
         </li>
         <li>
@@ -27,14 +27,18 @@
     </div>
     <div class="cleaner"></div>
   </div>
-  <div class="grid_4">
+  <div class="grid_4" id="main">
     {% if handler.current_user() %}
-    <p>You are {{handler.current_user().preferred_name()|escape}}</p>
-    <p>You are in {{handler.current_user().city|escape}}</p>
-    <p>Your URL is <a href="http://{{handler.current_user().link|escape}}">{{handler.current_user().link|escape}}</a></p>
-    <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
+      {% if handler.request.get('state') == 'people-add' %}
+        {% include 'people/add.html' %}
+      {% else %}
+        <p>You are {{handler.current_user().preferred_name()|escape}}</p>
+        <p>You are in {{handler.current_user().city|escape}}</p>
+        <p>Your URL is <a href="http://{{handler.current_user().link|escape}}">{{handler.current_user().link|escape}}</a></p>
+        <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
+      {% endif %}
     {% else %}
-    <p><a href="/people/add">Add yourself</a></p>
+    <p><a href="/people/add" class="add-yourself">Add yourself</a></p>
     {% endif %}
   </div>
 

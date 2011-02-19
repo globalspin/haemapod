@@ -13,5 +13,5 @@ class RequestHandler(megaera.RequestHandler):
     if user:
       return User.get_or_insert(key_name=user.email())
   
-  def login_url(self, uri=None):
-    return users.create_login_url(uri or self.request.uri)
+  def login_url(self, state):
+    return users.create_login_url('/?state='+state)

@@ -1,2 +1,2 @@
 def get(handler, response):
-  pass
+  response.user = handler.current_user()

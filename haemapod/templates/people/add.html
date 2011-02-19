@@ -1,9 +1,8 @@
-{% extends "wrapper.html" %}
-{% block content %}
 <script src="/js/geocoder.js"></script>
 
-  <h2>Add yourself</h2>
-  <form method="post">
+<h2>Add yourself</h2>
+{% if handler.current_user() %}
+  <form method="post" action="/people/add">
     <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
 
     <p>City <input type="text" name="city" value="{{user.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
@@ -25,4 +24,9 @@
     <p>Private <input type="checkbox" name="private" value="1" {% if user.private %}checked="checked"{% endif %}>
     <p><input type="submit" value="Add me to the map" {% if not user.location %}style="display:none"{% endif %}>
   </form>
-{% endblock %}
+{% else %}
+  <p>We use Google Accounts to authenticate you, because it's secure and easy.
+  <p><a href="{{handler.login_url('people-add')|escape}}">Log in with google</a>
+  <p>No account with Google? It's easy to set one up, and it can be used on lots of websites.
+  <p><a href="">Create a Google Account</a>
+{% endif %}
