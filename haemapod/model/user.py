@@ -9,8 +9,6 @@ class User(GeoModel):
   city = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)
   distance = db.StringProperty(choices=set(["here", "drive", "fly", "anywhere"]))
-  latitude = db.FloatProperty()
-  longitude = db.FloatProperty()
   link = db.StringProperty()
   private = db.BooleanProperty()
 
