@@ -61,3 +61,5 @@ class Event(GeoModel):
       anywhere_users=anywhere_users,
     )
   
+  def permalink(self):
+    return '/events/%s' % self.slug

@@ -18,6 +18,7 @@ def application():
     ('/events/users', RequestHandler.with_page('handlers.events.users')),
     ('/events/upload', RequestHandler.with_page('handlers.events.upload')),
     ('/events/([^/]*)$', RequestHandler.with_page('handlers.events.detail')),
+    ('/events/([^/]*)/add$', RequestHandler.with_page('handlers.events.attending.add')),
   ], debug=True)
 
 def main():

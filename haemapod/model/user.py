@@ -47,7 +47,13 @@ class User(GeoModel):
       return ue.put()
     else:
       return UserEvent(user=self, event=event, organizer=organizer).put()
-
+  
+  def is_attending(self, event):
+    if not event: return
+    for ue in self.userevent_set:
+      if ue.event.key() == event.key():
+        return True
+  
   def pretty_link(self):
     if self.link:
       return re.sub('twitter.com/', '@', self.link)
