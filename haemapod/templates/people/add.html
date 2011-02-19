@@ -1,12 +1,15 @@
 {% extends "wrapper.html" %}
 {% block content %}
+<script src="/js/geocoder.js"></script>
+
   <h2>Add yourself</h2>
   <form method="post">
     <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
-    <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
-    <p>City <input type="text" name="city" value="{{user.city or ''|escape}}">
-      <input type="hidden" name="lat" value="{{user.location.lat or ''|escape}}">
-      <input type="hidden" name="lon" value="{{user.location.lon or ''|escape}}">
+
+    <p>City <input type="text" name="city" value="{{user.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
+      <span id="geocode_loading"></span>
+      <input type="hidden" name="lat" id="lat" value="{{user.location.lat or ''|escape}}">
+      <input type="hidden" name="lon" id="long" value="{{user.location.lon or ''|escape}}">
     <p>To go to an event, I would
       <select name="distance">
           <option value="" {% if not user.distance %}selected="selected"{% endif %}>
@@ -18,6 +21,8 @@
           </option>
         {% endfor %}
       </select>
-    <p><input type="submit" value="Add me to the map">
+    <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
+    <p>Private <input type="checkbox" name="private" value="1" {% if user.private %}checked="checked"{% endif %}>
+    <p><input type="submit" value="Add me to the map" {% if not user.location %}style="display:none"{% endif %}>
   </form>
 {% endblock %}

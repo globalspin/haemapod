@@ -4,7 +4,6 @@ from geo.geomodel import GeoModel
 
 class User(GeoModel):
   user = db.UserProperty(required=True)
-  email = db.StringProperty()
   name = db.StringProperty()
   city = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)

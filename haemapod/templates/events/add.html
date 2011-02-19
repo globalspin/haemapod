@@ -1,1 +1,17 @@
-/events/add
+{% extends "wrapper.html" %}
+{% block content %}
+<script src="/js/geocoder.js"></script>
+
+  <h2>Add your event</h2>
+  <form method="post">
+    <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
+
+    <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
+      <span id="geocode_loading"></span>
+      <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
+      <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
+    <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
+    <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
+    <p><input type="submit" value="Add me to the map" {% if not event.location %}style="display:none"{% endif %}>
+  </form>
+{% endblock %}

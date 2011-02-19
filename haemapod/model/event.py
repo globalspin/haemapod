@@ -7,7 +7,6 @@ class Event(GeoModel):
   city = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)
   link = db.StringProperty()
-  private = db.BooleanProperty()
   
   def sanitize(self):
     return dict(
