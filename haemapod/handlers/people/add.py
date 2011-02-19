@@ -1,3 +1,5 @@
+from google.appengine.ext import db
+
 def post(handler, response):
   user = response.user = handler.current_user()
   if not user:
@@ -6,6 +8,11 @@ def post(handler, response):
   user.link = handler.request.get('link')
   user.city = handler.request.get('city')
   user.distance = handler.request.get('distance')
+  lat = handler.request.get('lat')
+  lon = handler.request.get('lon')
+  if lat and lon:
+    user.location = db.GeoPt(lat, lon)
+    user.update_location()
   user.put()
   handler.redirect('/people/add')
 
