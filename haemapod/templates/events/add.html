@@ -10,6 +10,8 @@
       <span id="geocode_loading"></span>
       <input type="hidden" name="lat" id="lat" value="{{event.location.lat or ''|escape}}">
       <input type="hidden" name="lon" id="long" value="{{event.location.lon or ''|escape}}">
+    <p>Date <input type="text" name="date" value="{{event.date or ''|escape}}">
+
     <p>Slug <input type="text" name="slug" value="{{event.slug or ''|escape}}">
     <p>URL <input type="text" name="link" value="{{event.link or ''|escape}}">
     <p><input type="submit" value="Add me to the map" {% if not event.location %}style="display:none"{% endif %}>

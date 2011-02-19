@@ -7,6 +7,7 @@ def post(handler, response):
   event.name = handler.request.get('name')
   event.link = handler.request.get('link')
   event.city = handler.request.get('city')
+  event.date = handler.request.get('date')
   lat = handler.request.get('lat')
   lon = handler.request.get('lon')
   if lat and lon:

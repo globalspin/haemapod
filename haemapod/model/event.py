@@ -5,6 +5,7 @@ class Event(GeoModel):
   name = db.StringProperty()
   slug = db.StringProperty()
   city = db.StringProperty()
+  date = db.StringProperty()
   created = db.DateTimeProperty(auto_now_add=True)
   link = db.StringProperty()
   
