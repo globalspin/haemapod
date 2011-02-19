@@ -26,6 +26,7 @@ class User(GeoModel, search.SearchableModel):
   
   def sanitize(self):
     return dict(
+      key=str(self.key()),
       name=self.preferred_name(),
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
