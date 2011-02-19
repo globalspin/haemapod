@@ -22,10 +22,10 @@ Site.Maps.prototype.setup = function () {
     new GM.Point(9, 30)   // anchor
   );
   
-  this.eventInfoWindow = new GM.InfoWindow({ 
-    content: "Copy goes here",
-    size: new GM.Size(50,50)
-  });
+  // this.eventInfoWindow = new GM.InfoWindow({ 
+  //   content: "Copy goes here",
+  //   size: new GM.Size(50,50)
+  // });
 
   // set up the map options
   this.mapOptions = {
@@ -115,6 +115,8 @@ Site.Maps.prototype.addItemEvent = function (oResponse) {
       title: item.name
     });
     
+    GM.event.addListener(marker, 'click', this.openEventInfo.bind(this));
+
     marker['key'] = item.key;
     this.aMarkers.push(marker);
     this.aEvents[item.key] = item;
@@ -166,7 +168,6 @@ Site.Maps.prototype.newUserAdded = function (user) {
 }
 
 Site.Maps.prototype.newEventAdded = function (event) {
-  console.log(event);
   var latLng = new GM.LatLng(event.lat, event.lng);
   var marker = new GM.Marker({
     position: latLng,
@@ -237,9 +238,8 @@ Site.Maps.prototype.highlightEvent = function (event, users) {
   var users = users || this.aUsers;
   var activeUserKeys = [];
   var activeMarker;
-  
   for (var i = users.length - 1; i >= 0; i--){
-    activeUserKeys[users[i].key] = 1;
+    activeUserKeys[users[i].key] = users[i];
   };
 
   this.resetMap();
@@ -259,24 +259,35 @@ Site.Maps.prototype.highlightEvent = function (event, users) {
     if (!activeUserKeys[item.key]) {
       item.setMap(null);
     } else {
-      var line = new GM.Polyline({
-        map: this.map,
-        path: [item.getCenter(), activeMarker.getPosition()],
-        strokeColor: '#3A2FF9',
-        strokeOpacity: 1,
-        strokeWeight: 2,
-        zIndex: 1
-      });
+      if (activeUserKeys[item.key].interested) {
+        item.setOptions({
+          fillOpacity: 1,
+          fillColor: '#C42816',
+          strokeColor: '#C42816',
+          strokeWeight: 3,
+          strokeOpacity: 1,
+          zIndex: 100
+        });
+      } else {
+        var line = new GM.Polyline({
+          map: this.map,
+          path: [item.getCenter(), activeMarker.getPosition()],
+          strokeColor: '#3A2FF9',
+          strokeOpacity: 1,
+          strokeWeight: 2,
+          zIndex: 1
+        });
 
-      item.setOptions({
-        fillOpacity: 1,
-        fillColor: '#3A2FF9',
-        strokeColor: '#3A2FF9',
-        strokeWeight: 3,
-        strokeOpacity: 1,
-        zIndex: 100
-      });
-      this.aPolylines.push(line);
+        item.setOptions({
+          fillOpacity: 1,
+          fillColor: '#3A2FF9',
+          strokeColor: '#3A2FF9',
+          strokeWeight: 3,
+          strokeOpacity: 1,
+          zIndex: 100
+        });
+        this.aPolylines.push(line);
+      }
     }
   }
 }
@@ -345,11 +356,15 @@ Site.Maps.prototype.hideUsers = function () {
   };
 }
 
-Site.Maps.prototype.openUserInfo = function (evt, circle) {
-  console.log(arguments);
-  this.eventInfoWindow.open(this.map, circle);
+Site.Maps.prototype.openUserInfo = function (latlng, circle) {
+  if (document.location.href == this.aUsers[circle.key].permalink) return;
+  state(this.aUsers[circle.key].permalink);
 }
 
-
+Site.Maps.prototype.openEventInfo = function (evt, marker) {
+  if (document.location.href == this.aEvents[marker.key].permalink) return;
+  state(this.aEvents[marker.key].permalink);
+  // this.eventInfoWindow.open(this.map, circle);
+}
 
 var oMap = new Site.Maps();
