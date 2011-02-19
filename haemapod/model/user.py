@@ -28,6 +28,7 @@ class User(GeoModel):
       name=self.preferred_name(),
       lat=self.location.lat if self.location else None,
       lng=self.location.lon if self.location else None,
+      permalink=self.permalink(),
     )
   
   def events(self):
