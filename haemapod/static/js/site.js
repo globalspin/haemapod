@@ -49,18 +49,22 @@ Function.prototype.later = function (msec)
 $(function() {
   $('a.async').live('click', function (evt) {
     evt.preventDefault();
-    $('#main').load(this.href);
+    state(this.href);
   });
   $('form.async').live('submit', function (evt) {
     evt.preventDefault();
     if (this.method == 'post') {
       $.post(this.action+'?json', $(this).serialize(), function (r) {
         if (r.redirect) {
-          $('#main').load(r.redirect);
+          state(r.redirect);
         }
       }, 'json');
     } else {
-      $('#main').load(this.action+'?'+$(this).serialize());
+      state(this.action+'?'+$(this).serialize());
     }
   });
 });
+
+function state (url, no_push) {
+  $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+}
