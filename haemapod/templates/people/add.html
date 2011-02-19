@@ -22,6 +22,7 @@
         {% endfor %}
       </select>
     <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
+    <p>Private <input type="checkbox" name="private" value="1" {% if user.private %}checked="checked"{% endif %}>
     <p><input type="submit" value="Add me to the map" {% if not user.location %}style="display:none"{% endif %}>
   </form>
 {% endblock %}

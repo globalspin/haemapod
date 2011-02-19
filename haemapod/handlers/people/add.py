@@ -8,6 +8,7 @@ def post(handler, response):
   user.link = handler.request.get('link')
   user.city = handler.request.get('city')
   user.distance = handler.request.get('distance')
+  user.private = bool(handler.request.get('private'))
   lat = handler.request.get('lat')
   lon = handler.request.get('lon')
   if lat and lon:
