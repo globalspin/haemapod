@@ -26,6 +26,7 @@ Site.Maps.prototype.initialize = function () {
   
   // listen for tiles loaded
   google.maps.event.addListener(this.map, 'tilesloaded', oMap.listUsers.bind(this));
+  google.maps.event.addListener(this.map, 'tilesloaded', oMap.listEvents.bind(this));
 }
 
 Site.Maps.prototype.getBoundingBoxCords = function (forReq) {
@@ -69,23 +70,30 @@ Site.Maps.prototype.listenServerServerResponse = function (oResponse) {
 
 Site.Maps.prototype.listUsers = function () {
   // load people
-  this.queryServer('/people/bounding_box', this.getBoundingBoxCords('forReq'), 'addUserCircle');
+  this.queryServer('/people/bounding_box', this.getBoundingBoxCords('forReq'), 'addItemCircle');
 }
 
-Site.Maps.prototype.addUserMarkers = function (oResponse) {
-  $.each(oResponse.users, function(_, user){
-    var latLng = new google.maps.LatLng(user.lat, user.lng);
+Site.Maps.prototype.listEvents = function () {
+  // load people
+  this.queryServer('/events/bounding_box', this.getBoundingBoxCords('forReq'), 'addItemMarkers');
+}
+
+Site.Maps.prototype.addItemMarkers = function (oResponse) {
+  var oItems = oResponse.users || oResponse.events;
+  $.each(oItems, function(_, oItem){
+    var latLng = new google.maps.LatLng(oItem.lat, oItem.lng);
     var marker = new google.maps.Marker({
       position: latLng,
       map: this.map,
-      title: user.name
+      title: oItem.name
     });
   }.bind(this));
 }
 
-Site.Maps.prototype.addUserCircle = function (oResponse) {
-  $.each(oResponse.users, function(_, user){
-    var latLng = new google.maps.LatLng(user.lat, user.lng);
+Site.Maps.prototype.addItemCircle = function (oResponse) {
+  var oItems = oResponse.users || oResponse.events;
+  $.each(oItems, function(_, oItem){
+    var latLng = new google.maps.LatLng(oItem.lat, oItem.lng);
     var marker = new google.maps.Circle({
       center: latLng,
       map: this.map,

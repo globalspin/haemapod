@@ -63,6 +63,22 @@ table {
 /* common site css */
 body {
   background-color: #989B9C;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a:link,
+a:visited {
+  color: #666;
+}
+
+a:hover,
+a:active {
+  color: #333;
+  text-decoration: none;
 }
 
 #outer {
@@ -75,7 +91,42 @@ body {
   background-color: #FFF;
 }
 
+#content {
+  padding-top: 15px;
+}
+
 #map_canvas { 
   width: 620px;
-  height: 400px;
+  height: 450px;
+}
+
+#map-key {
+  padding: 10px 0;
+  margin: 0 10px 15px 10px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+#map-key .what {
+  float: left;
+}
+
+#map-key .key-actions {
+  float: right;
+  margin-right: 30px;
+}
+
+#map-key li {
+  display: inline;
+  position: relative;
+  margin-left: 30px;
+}
+
+#map-key .what li span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #C42816;
+  border-radius: 3px;
+  border: 1px solid #666;
 }
