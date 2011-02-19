@@ -134,13 +134,17 @@ a:active {
 h2, h3 {
   clear: both;
   font-weight: bold;
-  margin: 10px 0 5px;
+/*  margin: 10px 0 5px;*/
+}
+
+p {
+  margin-bottom: 1em;
 }
 
 /* sections/event */
 
 .section-event {
-  margin: 10px 0;
+  margin: 1em 0;
 }
 
 .section-event .name a {
@@ -157,3 +161,8 @@ h2, h3 {
   float: left;
   margin-right: 10px;
 }
+
+.user-details p.link {
+  margin: 0;
+}
+
