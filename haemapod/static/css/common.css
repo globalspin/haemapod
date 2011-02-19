@@ -158,6 +158,10 @@ a:active {
   color: #69B;
 }
 
+#map-key .what a:hover {
+  text-decoration: underline;
+}
+
 #map-key .key-actions {
   float: right;
 }
@@ -254,13 +258,26 @@ form input[type=text] {
 
 .section-event .name a {
   font-weight: bold;  
-  text-decoration: none;
-  color: black;
+  text-decoration: underline;
+  color: #69B;
   font-size: 110%;
+}
+
+.section-event .name a:hover {
+  text-decoration: underline;
 }
 
 .section-event p {
   margin-bottom: .2em;
+}
+
+.section-event p.link a {
+  color: black;
+  text-decoration: none;
+}
+
+.section-event p.link a:hover {
+  text-decoration: underline;
 }
 
 /* user details */
@@ -279,9 +296,27 @@ form input[type=text] {
   margin: 0;
 }
 
+.user-details p.link a {
+  color: black;
+  text-decoration: none;
+}
+
+.user-details p.link a:hover {
+  text-decoration: underline;
+}
+
+
 /* event details */
 p.cityinfo span {
   display: block;
+}
+
+p.cityinfo span a {
+  color: black;
+}
+
+p.cityinfo span a:hover {
+  text-decoration: underline;
 }
 
 span.org {

@@ -9,7 +9,7 @@
     <span><em>No date set yet.</em></span>
   {% endif %}
   {% if event.link %}
-    <span><a href="{{event.link|escape}}">{{event.pretty_link()|escape}}</a></span>
+    <span><a href="http://{{event.link|escape}}"  class="link">{{event.pretty_link()|escape}}</a></span>
   {% endif %}
   </p>
 
