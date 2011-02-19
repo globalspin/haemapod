@@ -7,10 +7,10 @@ def application():
   return WSGIApplication([
     ('/', RequestHandler.with_page('handlers.default')),
     ('/people/add', RequestHandler.with_page('handlers.people.add')),
-    ('/people/([^/]*)$', RequestHandler.with_page('handlers.people.detail')),
     ('/people/proximity', RequestHandler.with_page('handlers.people.proximity')),
     ('/people/bounding_box', RequestHandler.with_page('handlers.people.bounding_box')),
     ('/people/upload', RequestHandler.with_page('handlers.people.upload')),
+    ('/people/([^/]*)$', RequestHandler.with_page('handlers.people.detail')),
     ('/events/add', RequestHandler.with_page('handlers.events.add')),
     ('/events/proximity', RequestHandler.with_page('handlers.events.proximity')),
     ('/events/bounding_box', RequestHandler.with_page('handlers.events.bounding_box')),
