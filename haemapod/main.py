@@ -7,6 +7,7 @@ def application():
   return WSGIApplication([
     ('/', RequestHandler.with_page('handlers.default')),
     ('/people/add', RequestHandler.with_page('handlers.people.add')),
+    ('/events/add', RequestHandler.with_page('handlers.events.add')),
   ], debug=True)
 
 def main():
