@@ -14,9 +14,15 @@ class Event(GeoModel):
     return dict(
       name=self.name,
       lat=self.location.lat if self.location else None,
-      lgn=self.location.lon if self.location else None,
+      lng=self.location.lon if self.location else None,
     )
 
   def pretty_link(self):
     if self.link:
       return re.sub('twitter.com/', '@', self.link)
+  
+  def attending(self):
+    return (ue.user for ue in self.userevent_set)
+  
+  def organizers(self):
+    return (ue.user for ue in self.userevent_set if ue.organizer)
