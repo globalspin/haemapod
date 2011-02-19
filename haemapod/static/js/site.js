@@ -54,7 +54,14 @@ $(function() {
   $('form.async').live('submit', function (evt) {
     evt.preventDefault();
     if (this.method == 'post') {
-      $.post(this.action+'?json', $(this).serialize(), function (r) {
+      var action = this.action;
+      $.post(action+'?json', $(this).serialize(), function (r) {
+        if (/\/people\/add/.test(action) && r.user) {
+          oMap.newUserAdded(r.user);
+        }
+        if (/\/events\/add/.test(action) && r.event) {
+          oMap.newEventAdded(r.event);
+        }
         if (r.redirect) {
           state(r.redirect);
         }
