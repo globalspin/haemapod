@@ -78,8 +78,25 @@ function load_page_data (url) {
     if (r.user && r.attending) {
       oMap.highlightUser(r.user, r.attending);
     }
-    if (r.event && r.attending) {
-      oMap.highlightEvent(r.event, r.attending);
+    if (r.event && r.attending && r.interested) {
+      var users = r.attending;
+      for (var k in r.interested) {
+        for (var i = 0; i < r.interested[k].length; i++) {
+          var u = r.interested[k][i];
+          var found;
+          for (var j = 0; j < users.length; j++) {
+            if (users[i].permalink == u.permalink) {
+              found = true;
+              break
+            }
+          }
+          if (!found) {
+            users.push(u);
+            u.interested = k;
+          }
+        }
+      }
+      oMap.highlightEvent(r.event, users);
     }
   });
 }

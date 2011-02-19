@@ -55,10 +55,10 @@ class Event(GeoModel):
     )
     anywhere_users = User.all().filter('distance =','anywhere').fetch(max_results)
     return dict(
-      here_users=here_users,
-      drive_users=drive_users,
-      fly_users=fly_users,
-      anywhere_users=anywhere_users,
+      here=here_users,
+      drive=drive_users,
+      fly=fly_users,
+      anywhere=anywhere_users,
     )
   
   def permalink(self):

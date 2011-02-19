@@ -11,4 +11,5 @@ def post(handler, response):
   organizer = bool(handler.request.get('organizer'))
   if user:
     user.add_event(event, organizer)
+  response.redirect = event.permalink()
   return handler.redirect(event.permalink())
