@@ -1,1 +1,23 @@
-/people/add
+{% extends "wrapper.html" %}
+{% block content %}
+  <h2>Add yourself</h2>
+  <form method="post">
+    <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
+    <p>URL <input type="text" name="link" value="{{user.link or ''|escape}}">
+    <p>City <input type="text" name="city" value="{{user.city or ''|escape}}">
+      <input type="hidden" name="lat" value="{{user.location.lat or ''|escape}}">
+      <input type="hidden" name="lon" value="{{user.location.lon or ''|escape}}">
+    <p>To go to an event, I would
+      <select name="distance">
+          <option value="" {% if not user.distance %}selected="selected"{% endif %}>
+            -- choose --
+          </option>
+        {% for choice in distance_choices %}
+          <option value="{{choice[1]|escape}}" {% if user.distance ==  choice[1] %}selected="selected"{% endif %}>
+            {{choice[0]|escape}}
+          </option>
+        {% endfor %}
+      </select>
+    <p><input type="submit" value="Add me to the map">
+  </form>
+{% endblock %}
