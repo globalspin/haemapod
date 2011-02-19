@@ -2,6 +2,7 @@
 {% block content %}
   <h2>{{ user.name }}</h2>
   
+  <p><img src="{{ user.gravatar() }}" width=40 height=40 />
   <p><a href="http://{{ user.link }}">{{ user.pretty_link() }}</a></p>
   <p>{{ user.city }}</p>
   

@@ -1,4 +1,5 @@
 import re
+import urllib, hashlib
 from google.appengine.ext import db
 from google.appengine.api import users
 from geo.geomodel import GeoModel
@@ -52,6 +53,14 @@ class User(GeoModel):
     if self.link:
       return re.sub('twitter.com/', '@', self.link)
   
+  def gravatar(self):
+    default = "http://0.gravatar.com/avatar/1a33e7a69df4f675fcd799edca088ac2?s=40&d=identicon"
+    size = 40
+
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.key().name().lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    return gravatar_url
+
 class UserEvent(db.Model):
   user = db.ReferenceProperty(User)
   event = db.ReferenceProperty(Event)
