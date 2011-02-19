@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}haemapod{% endblock %}</title>
+  {% block head %}{% endblock head%}
+
+  <script src="/js/jquery-1.5.min.js"></script>
+  {% block js %}{% endblock %}
+  
+  <link rel="stylesheet" href="/css/common.css" />
+  {% block css %}{% endblock %}
+  <!-- Date: 2011-02-18 -->
+</head>
+<body>
+  <div id="header">
+      {% block header %}{% endblock %}
+  </div>
+  
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+  
+  <div id="footer">
+      {% block footer %}{% endblock %}
+  </div>
+</body>

@@ -1,8 +1,10 @@
-Haemapod!
-
-{% if handler.current_user() %}
-  <p>You are {{handler.current_user().user.email()}}</p>
+{% extends "wrapper.html" %}
+{% block content %}
+  Haemapod!
+  {% if handler.current_user() %}
+  <p>You are {{handler.current_user().preferred_name()|escape}}</p>
   <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
-{% else %}
-  <p><a href="{{handler.login_url()|escape}}">log in</a></p>
-{% endif %}
+  {% else %}
+  <p><a href="{{handler.login_url("/people/add")|escape}}">Add yourself</a></p>
+  {% endif %}
+{% endblock %}
