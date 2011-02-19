@@ -7,7 +7,7 @@
     <p>City <input type="text" name="city" value="{{user.city or ''|escape}}">
       <input type="hidden" name="lat" value="{{user.location.lat or ''|escape}}">
       <input type="hidden" name="lon" value="{{user.location.lon or ''|escape}}">
-    <p>To go to an event, I would:
+    <p>To go to an event, I would
       <select name="distance">
           <option value="" {% if not user.distance %}selected="selected"{% endif %}>
             -- choose --
