@@ -18,7 +18,7 @@
     {% if handler.current_user().is_attending(event) %}
 
     {% else %}
-      <form action="{{event.permalink()|escape}}/attending/add" method="post">
+      <form action="{{event.permalink()|escape}}/attending/add" method="post" class="async">
         <input type="submit" value="I'm attending this">
         <input type="checkbox" name="organizer" id="organizer_chk" value="1"> <label for="organizer_chk">and organizing too!</label>
       </form>
