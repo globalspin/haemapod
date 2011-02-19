@@ -1,0 +1,15 @@
+<div class="user-details">
+  <p class="gravatar">
+    <a href="{{user.permalink()|escape}}" class="async">
+      <img src="{{user.gravatar()|escape}}" width="40" height="40">
+    </a>
+  </p>
+
+  {% if user.link %}
+    <p class="link"><a href="http://{{user.link|escape}}">{{user.pretty_link()|escape}}</a>
+  {% endif %}
+
+  {% if user.city %}
+    <p class="city">{{user.city|escape}}</p>
+  {% endif %}
+</div>

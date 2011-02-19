@@ -14,6 +14,7 @@ def post(handler, response):
     user.location = db.GeoPt(lat, lon)
     user.update_location()
   user.put()
+  response.redirect=user.permalink()
   handler.redirect(user.permalink())
 
 def get(handler, response):

@@ -44,16 +44,20 @@ Function.prototype.later = function (msec)
 
 // User Interface
 $(function() {
-  $('.async').live('click', function (evt) {
+  $('a.async').live('click', function (evt) {
     evt.preventDefault();
     $('#main').load(this.href);
   });
-  $('form[action="/people/add"]').live('submit', function (evt) {
+  $('form.async').live('submit', function (evt) {
     evt.preventDefault();
-    $.post(this.action+'?json', $(this).serialize(), function (r) {
-      if (r.user && r.user.permalink) {
-        $('#main').load(r.user.permalink);
-      }
-    }, 'json');
+    if (this.method == 'post') {
+      $.post(this.action+'?json', $(this).serialize(), function (r) {
+        if (r.redirect) {
+          $('#main').load(r.redirect);
+        }
+      }, 'json');
+    } else {
+      $('#main').load(this.action+'?'+$(this).serialize());
+    }
   });
 });

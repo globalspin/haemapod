@@ -2,7 +2,7 @@
 
 <h2>Add yourself</h2>
 {% if handler.current_user() %}
-  <form method="post" action="/people/add">
+  <form method="post" action="/people/add" class="async">
     <p>Name <input type="text" name="name" value="{{user.preferred_name()|escape}}">
 
     <p>City <input type="text" name="city" value="{{user.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">

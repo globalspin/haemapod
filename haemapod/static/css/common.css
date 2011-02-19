@@ -167,13 +167,25 @@ a:active {
 h2, h3 {
   clear: both;
   font-weight: bold;
-  margin: 10px 0 5px;
+  margin: .5em 0 1em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+ul {
+  margin-bottom: 1em;
+}
+
+li {
+  clear: both;
 }
 
 /* sections/event */
 
 .section-event {
-  margin: 10px 0;
+  margin: 1em 0;
 }
 
 .section-event .name a {
@@ -183,10 +195,15 @@ h2, h3 {
 /* user details */
 
 .user-details {
-  margin: 20px 0;
+  margin-bottom: 1em;
 }
 
 .user-details p.gravatar {
   float: left;
   margin-right: 10px;
 }
+
+.user-details p.link {
+  margin: 0;
+}
+
