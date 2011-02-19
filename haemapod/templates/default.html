@@ -4,15 +4,18 @@
 {% endblock %}
 
 {% block content %}
-  Haemapod!
-  {% if handler.current_user() %}
-  <p>You are {{handler.current_user().preferred_name()|escape}}</p>
-  <p>You are in {{handler.current_user().city|escape}}</p>
-  <p>Your URL is <a href="http://{{handler.current_user().link|escape}}">{{handler.current_user().link|escape}}</a></p>
-  <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
-  {% else %}
-  <p><a href="{{handler.login_url("/people/add")|escape}}">Add yourself</a></p>
-  {% endif %}
-  
-  <div id="map_canvas"></div>
+  <div class="grid_4">
+    {% if handler.current_user() %}
+    <p>You are {{handler.current_user().preferred_name()|escape}}</p>
+    <p>You are in {{handler.current_user().city|escape}}</p>
+    <p>Your URL is <a href="http://{{handler.current_user().link|escape}}">{{handler.current_user().link|escape}}</a></p>
+    <p><a href="{{handler.logout_url()|escape}}">log out</a></p>
+    {% else %}
+    <p><a href="{{handler.login_url("/people/add")|escape}}">Add yourself</a></p>
+    {% endif %}
+  </div>
+
+  <div class="grid_8">
+    {% include 'sections/map.html' %}
+  </div>
 {% endblock %}
