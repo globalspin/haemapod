@@ -2,6 +2,7 @@ import yaml
 import re
 
 from model import User
+from model import Event
 
 from google.appengine.ext import db
 
@@ -23,6 +24,15 @@ def post(handler, response):
         user.location = db.GeoPt(lat, lon)
         user.update_location()
     user.put()
+    for slug in person['organizing']:
+      event = Event.all().filter('slug =', slug).get()
+      if event:
+        user.add_event(event, bool(1))
+    for slug in person['attending']:
+      event = Event.all().filter('slug =', slug).get()
+      if event:
+        user.add_event(event)
+
 
 def get(handler, response):
   pass
