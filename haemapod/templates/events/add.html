@@ -4,7 +4,7 @@
 
   <h2>Add your event</h2>
   <form method="post">
-    <p>Name <input type="text" name="name" value="{{event.name()|escape}}">
+    <p>Name <input type="text" name="name" value="{{event.name or ''|escape}}">
 
     <p>City <input type="text" name="city" value="{{event.city or ''|escape}}" onblur="geocode(this.value, 'lat', 'long')">
       <span id="geocode_loading"></span>
