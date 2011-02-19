@@ -4,6 +4,29 @@
 {% endblock %}
 
 {% block content %}
+  <div id="map-key">
+    <div class="what">
+      <strong>SpaceUp</strong>	
+      unconference map
+    </div>
+    <div class="key-actions">
+      <ul>
+        <li>
+          <span class="circle"></span>
+          <strong>People -</strong> 
+          <a href="#" id="add-yourself">add yourself</a> -
+          <a href="#" id="find-someone">find someone</a>
+        </li>
+        <li>
+          <span class="marker"></span>
+          <strong>SpaceUps -</strong> 
+          <a href="#" id="add-event">add one</a> -
+          <a href="#" id="find-someone">browse</a>
+        </li>
+      </ul>
+    </div>
+    <div class="cleaner"></div>
+  </div>
   <div class="grid_4">
     {% if handler.current_user() %}
     <p>You are {{handler.current_user().preferred_name()|escape}}</p>
