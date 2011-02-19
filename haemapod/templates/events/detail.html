@@ -15,11 +15,16 @@
     <p>Nobody organizing
   {% endfor %}
   <p>{{interested}} interested
-  {% if handler.current_user().is_attending(event) %}
-    <p>You are attending this event
+    
+  {% if handler.current_user() %}
+    {% if handler.current_user().is_attending(event) %}
+      <p>You are attending this event
+    {% else %}
+      <form action="{{event.permalink()|escape}}/attending/add" method="post">
+        <input type="submit" value="I'm attending">
+      </form>
+    {% endif %}
   {% else %}
-    <form action="{{event.permalink()|escape}}/attending/add" method="post">
-      <input type="submit" value="I'm attending">
-    </form>
+    <p><a href="/people/add">Add yourself</a>
   {% endif %}
 {% endblock %}

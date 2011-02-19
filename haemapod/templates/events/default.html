@@ -4,9 +4,7 @@
   <ul>
     {% for event in events %}
     <li>
-      <p><strong>{{ event.name }}</strong></p>
-      <p>{{ event.date }}</p>
-      <p><a href="http://{{ event.link }}">{{ event.pretty_link() }}</a></p>
+      {% include "sections/event.html" %}
     </li>
     {% endfor %}    
   </ul>

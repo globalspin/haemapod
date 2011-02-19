@@ -1,3 +1,7 @@
 <div id="footer" class="grid_12">
-  this will be a footer at some point
+  {% if handler.current_user() %}
+    <p>
+      You are <a href="{{handler.current_user().permalink()|escape}}">{{handler.current_user().preferred_name()|escape}}</a>
+      <a href="{{handler.logout_url()|escape}}">(log out)</a>
+  {% endif %}
 </div>

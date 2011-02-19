@@ -79,3 +79,13 @@ body {
   width: 620px;
   height: 400px;
 }
+
+/* sections/event */
+
+.section-event {
+  margin: 10px 0;
+}
+
+.section-event .name a {
+  font-weight: bold;
+}
