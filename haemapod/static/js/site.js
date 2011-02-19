@@ -77,8 +77,7 @@ function load_page_data (url) {
   $.getJSON(url+(url.indexOf('?')>0?'&':'?')+'json', function (r) {
     if (r.user && r.attending) {
       oMap.highlightUser(r.user, r.attending);
-    }
-    if (r.event && r.attending && r.interested) {
+    } else if (r.event && r.attending && r.interested) {
       var users = r.attending;
       for (var k in r.interested) {
         for (var i = 0; i < r.interested[k].length; i++) {
@@ -97,6 +96,8 @@ function load_page_data (url) {
         }
       }
       oMap.highlightEvent(r.event, users);
+    } else {
+      oMap.resetMap();
     }
   });
 }
