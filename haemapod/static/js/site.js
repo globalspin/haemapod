@@ -73,9 +73,7 @@ $(function() {
   });
 });
 
-// History & State Management
-function state (url, no_push) {
-  $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+function load_page_data (url) {
   $.getJSON(url+(url.indexOf('?')>0?'&':'?')+'json', function (r) {
     if (r.user && r.attending) {
       oMap.highlightUser(r.user, r.attending);
@@ -84,6 +82,12 @@ function state (url, no_push) {
       oMap.highlightEvent(r.event, r.attending);
     }
   });
+}
+
+// History & State Management
+function state (url, no_push) {
+  $('#main').load(url+(url.indexOf('?')>0?'&':'?')+'_main');
+  load_page_data(url);
   if (no_push !== 'no push') {
     history.pushState({}, undefined, url);
   }
