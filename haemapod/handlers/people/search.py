@@ -7,4 +7,4 @@ MAX_RESULTS = 10
 def get(handler, response):
   response.query = handler.request.get('q')
   if response.query:
-    response.users = User.all().search(response.query).fetch(MAX_RESULTS)
+    response.users = User.all().filter('private =', False).search(response.query).fetch(MAX_RESULTS)
