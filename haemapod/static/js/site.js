@@ -75,8 +75,8 @@ $(function() {
 
 function load_page_data (url) {
   $.getJSON(url+(url.indexOf('?')>0?'&':'?')+'json', function (r) {
-    if (r.user && r.attending) {
-      oMap.highlightUser(r.user, r.attending);
+    if (r.user && r.attending && r.interested) {
+      oMap.highlightUser(r.user, r.attending,  r.interested);
     } else if (r.event && r.attending && r.interested) {
       var users = r.attending;
       for (var k in r.interested) {

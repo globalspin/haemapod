@@ -181,10 +181,11 @@ Site.Maps.prototype.newEventAdded = function (event) {
   this.aEvents[event.key] = event;
 }
 
-Site.Maps.prototype.highlightUser = function (user, events) {
+Site.Maps.prototype.highlightUser = function (user, events, interested) {
   var user = user || this.aUsers[4];
   var events = events || this.aCircles;
-  var activeEventsKeys = []
+  var activeEventsKeys = [];
+  var interestedEventsKeys = [];
   var activeCircle;
   if (!user) return;
 
@@ -192,6 +193,10 @@ Site.Maps.prototype.highlightUser = function (user, events) {
   
   for (var i = events.length - 1; i >= 0; i--){
     activeEventsKeys[events[i].key] = 1;
+  };
+  
+  for (var i = interested.length - 1; i >= 0; i--){
+    interestedEventsKeys[interested[i].key] = 1;
   };
 
   for (var i = this.aCircles.length - 1; i >= 0; i--){
@@ -226,7 +231,7 @@ Site.Maps.prototype.highlightUser = function (user, events) {
         zIndex: 1
       });
       this.aPolylines.push(line);
-    } else {
+    } else if (!interestedEventsKeys[item.key]) {
       item.setMap(null);
     }
     
