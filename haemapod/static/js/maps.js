@@ -164,6 +164,7 @@ Site.Maps.prototype.newUserAdded = function (user) {
     strokeColor: '#000',
     strokeOpacity: 0.65,
   });
+  circle['key'] = user.key;
   this.aCircles.push(circle);
   this.aUsers[user.key] = user;
 }
