@@ -38,24 +38,24 @@ class Event(GeoModel):
     if not self.location: return
     from user import User
     here_users = User.proximity_fetch(
-      User.all().filter('distance =','here'),
+      User.all().filter('distance =','here').filter('private =', False),
       self.location,
       max_results=max_results,
       max_distance=HERE_RADIUS,
     )
     drive_users = User.proximity_fetch(
-      User.all().filter('distance =','drive'),
+      User.all().filter('distance =','drive').filter('private =', False),
       self.location,
       max_results=max_results,
       max_distance=DRIVE_RADIUS,
     )
     fly_users = User.proximity_fetch(
-      User.all().filter('distance =','fly'),
+      User.all().filter('distance =','fly').filter('private =', False),
       self.location,
       max_results=max_results,
       max_distance=FLY_RADIUS,
     )
-    anywhere_users = User.all().filter('distance =','anywhere').fetch(max_results)
+    anywhere_users = User.all().filter('distance =','anywhere').filter('private =', False).fetch(max_results)
     return dict(
       here=here_users,
       drive=drive_users,

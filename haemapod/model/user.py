@@ -9,6 +9,10 @@ from re import sub
 
 from event import Event
 
+HERE_RADIUS = 32186 # 20 miles
+DRIVE_RADIUS = 241401 # 150 miles
+FLY_RADIUS = 3218688 # 2000 miles
+
 class User(GeoModel, search.SearchableModel):
   name = db.StringProperty()
   city = db.StringProperty()
@@ -78,6 +82,34 @@ class User(GeoModel, search.SearchableModel):
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(self.email.lower()).hexdigest() + "?"
     gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
     return gravatar_url
+  
+  def interested(self, max_results=10):
+    if not self.location: return
+    if not self.distance: return
+    if self.distance == 'here':
+      return Event.proximity_fetch(
+        Event.all(),
+        self.location,
+        max_results=max_results,
+        max_distance=HERE_RADIUS,
+      )
+    if self.distance == 'drive':
+      return Event.proximity_fetch(
+        Event.all(),
+        self.location,
+        max_results=max_results,
+        max_distance=DRIVE_RADIUS,
+      )
+    if self.distance == 'fly':
+      return Event.proximity_fetch(
+        Event.all(),
+        self.location,
+        max_results=max_results,
+        max_distance=FLY_RADIUS,
+      )
+    if self.distance == 'anywhere':
+      return Event.all().fetch(max_results)
+
 
 class UserEvent(db.Model):
   user = db.ReferenceProperty(User)

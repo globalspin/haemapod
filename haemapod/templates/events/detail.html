@@ -34,9 +34,11 @@
     
   <ul>
     {% for user in attending %}
+    {% if user.private == False %}
     <li class="attendee"><a href="{{user.permalink()|escape}}" class="async person">{{ user.preferred_name() }}</a>
     {% if user.is_organizing(event) %} <span class="org">organizer</span> {% endif %}
     {% include "sections/user.html" %}</li>
+    {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}

@@ -15,4 +15,4 @@ def get(handler, response):
   response.attending = list(response.user.events())
   response.attendee_count = len(response.attending)
   response.organizing_count = len(response.organizing)
-  
+  response.interested = response.user.interested()
