@@ -82,7 +82,7 @@ function load_page_data (url) {
       for (var k in r.interested) {
         for (var i = 0; i < r.interested[k].length; i++) {
           var u = r.interested[k][i];
-          var found;
+          var found=false;
           for (var j = 0; j < users.length; j++) {
             if (users[j].permalink == u.permalink) {
               found = true;
