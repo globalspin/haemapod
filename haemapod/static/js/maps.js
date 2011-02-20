@@ -9,6 +9,7 @@ Site.Maps = function (oArgs) {
   this.aEvents = {};
   this.aUsers = {};
   this.aPolylines = [];
+  this.bRendering = false;
   $(this.setup.bind(this));
 }
 
@@ -230,7 +231,8 @@ Site.Maps.prototype.highlightUser = function (user, events) {
     }
     
   };
-
+  
+  this.bRendering = false;
 }
 
 Site.Maps.prototype.highlightEvent = function (event, users) {
@@ -290,6 +292,7 @@ Site.Maps.prototype.highlightEvent = function (event, users) {
       }
     }
   }
+  this.bRendering = false;
 }
 
 Site.Maps.prototype.resetUser = function (item) {
@@ -325,8 +328,8 @@ Site.Maps.prototype.resetEvents = function () {
   for (var i = this.aMarkers.length - 1; i >= 0; i--){
     this.aMarkers[i].setMap(this.map);
   };
-
-  this.showUsers();
+  // this.showUsers();
+  this.bRendering = false;
 }
 
 Site.Maps.prototype.removePolylines = function () {
@@ -339,6 +342,9 @@ Site.Maps.prototype.removePolylines = function () {
 }
 
 Site.Maps.prototype.resetMap = function () {
+  if (this.bRendering) return;
+  this.bRendering = true;
+  
   this.removePolylines();
   this.resetUsers();
   this.resetEvents();
