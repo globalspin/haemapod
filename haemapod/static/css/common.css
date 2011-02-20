@@ -135,6 +135,10 @@ a:active {
   font-size: small;
 }
 
+#footer p a {
+  color: black;
+}
+
 #map_canvas { 
   width: 805px;
   height: 450px;
