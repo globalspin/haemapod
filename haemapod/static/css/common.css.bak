@@ -62,10 +62,6 @@ table {
 }
 
 /* common site css */
-html { height: 100% }
-body { height: 100%; margin: 0px; padding: 0px }
-#map_canvas { height: 100% }
-
 body {
   background-color: #98BD9C;
   font-family: 'Aurulent Sans', Helvetica, Arial, sans-serif;
@@ -88,49 +84,41 @@ a:active {
 
 .col-left,
 .col-right {
-/*  float: left;*/
+  float: left;
 }
 
 .col-left {
-  top: 120px;
-  position: absolute;
   width: 350px;
   margin: 0 15px;
-  height: 65%;
+  height: 450px;
   overflow-y: auto;
-  padding: 15px;
-  background-color: #FFF;
-  z-index: 1000;
-  border-radius: 5px;
-  webkit-box-shadow: 10px 10px 5px #888;
-  moz-box-shadow: 10px 10px 5px #888;
-  box-shadow: 10px 10px 5px #888;
 }
 
 .col-right {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  width: 805px;
   margin: 0;
   padding: 0;
-  background-color: #AFAFAF;
 }
 
 #outer {
-  width: 100%;
-  height: 100%;
-  margin: none;
+  width: 1200px;
+  margin: 2em auto;
   background-color: #FFF;
-  padding: 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 4px 0px, rgba(0, 0, 0, 0.0976562) 0px 0px 40px 0px inset;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-origin: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 4px 0px, rgba(0, 0, 0, 0.0976562) 0px 0px 40px 0px inset;
+  padding-bottom: 14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 14px;
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  margin: 0;
+  position: relative;
+  margin: 0 15px;
   height: 35px;
-  width: 100%;
-  background-color: #FFF;
 }
 
 #footer .haemapod {
@@ -148,25 +136,18 @@ a:active {
 }
 
 #map_canvas { 
-  width: 100%;
-  height: 100%;
+  width: 805px;
+  height: 450px;
 }
 
 #map-key {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   padding-bottom: 10px;
-  margin: 0;
+  margin: 15px;
   border-bottom: 1px solid #333;
-  z-index: 1000;
-  background-color: #FFF;
 }
 
 #map-key .what {
   float: left;
-  margin: 15px 0 0 15px;
 }
 
 #map-key .what a {
@@ -183,14 +164,14 @@ a:active {
 
 #map-key .key-actions {
   float: right;
-  margin: 20px 20px 18px 20px;
 }
 
-#map-key ul {
+#map-key ul{
   margin: 0;
 }
 
 #map-key li {
+  display: inline;
   position: relative;
   margin-left: 30px;
 }

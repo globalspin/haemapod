@@ -2,7 +2,7 @@ Site.Maps = function (oArgs) {
   oArgs = oArgs || {}
   this.zoom = oArgs.zoom || 4;
   this.initialLat = oArgs.latitude || 38;
-  this.initialLng = oArgs.longitude || -97;
+  this.initialLng = oArgs.longitude || -110;
   this.mapType = oArgs.map_type || 'ROADMAP';
   this.aMarkers = [];
   this.aCircles = [];
@@ -35,7 +35,7 @@ Site.Maps.prototype.setup = function () {
     mapTypeId: GM.MapTypeId[this.mapType],
     backgroundColor: '#AEAEAE',
     disableDefaultUI: 1,
-    draggable: false,
+    // draggable: false,
     scrollwheel: false
   };
   
