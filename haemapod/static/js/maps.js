@@ -10,7 +10,7 @@ Site.Maps = function (oArgs) {
   this.aUsers = {};
   this.aPolylines = [];
   this.bRendering = false;
-  $(this.setup.bind(this));
+  $(this.setup.bind(this).later(2000));
 }
 
 Site.Maps.prototype.setup = function () {
@@ -32,10 +32,10 @@ Site.Maps.prototype.setup = function () {
   this.mapOptions = {
     zoom: this.zoom,
     center: this.latlng,
-    mapTypeId: GM.MapTypeId[this.mapType],
-    backgroundColor: '#AEAEAE',
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    // backgroundColor: '#AEAEAE',
     disableDefaultUI: 1,
-    // draggable: false,
+    draggable: false,
     scrollwheel: false
   };
   
