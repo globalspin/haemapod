@@ -28,4 +28,14 @@
     {% endfor %}
   </ul>
   {% endif %}
+
+  {% if interested|length > 0 %}
+  <h3>interested:</h3>
+
+  <ul>
+    {% for event in interested %}
+      <li>{% include "sections/event.html" %}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 {% endblock %}
