@@ -158,7 +158,7 @@ a:active {
   font-weight: bold;
   font-size: 300%;
   text-decoration: none;
-  font-family: 'firsttest';
+  font-family: 'firsttest', 'Aurulent Sans', Helvetica, Arial, sans-serif;
   color: #69B;
 }
 
@@ -212,7 +212,8 @@ h2, h3 {
 }
 
 h2 {
-  font-size: 120%;
+  font-size: 150%;
+  font-weight: normal;
 }
 
 p {
